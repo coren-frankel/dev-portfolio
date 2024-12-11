@@ -48,3 +48,9 @@ export default tseslint.config({
   },
 })
 ```
+
+### References:
+- https://codesandbox.io/p/sandbox/b07dmz?file=%2Fsrc%2FApp.tsx
+- https://www.react-spring.dev/docs
+- https://r3f.docs.pmnd.rs/tutorials/events-and-interaction
+- https://r3f.docs.pmnd.rs/tutorials/using-with-react-spring
