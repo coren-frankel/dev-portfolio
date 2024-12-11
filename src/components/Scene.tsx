@@ -13,8 +13,8 @@ const Scene = () => {
     <mesh rotation={[10, 10, 10]} ref={myMesh}>
       <ambientLight intensity={0.5} />
       <directionalLight position={[1, 1, 1]} intensity={1.5} />
-      <octahedronGeometry attach="geometry" />
-      <meshPhongMaterial attach="material" color={"lavender"} />
+      <boxGeometry attach="geometry" />
+      <meshPhongMaterial attach="material" color={"gold"} />
     </mesh>
   )
 }

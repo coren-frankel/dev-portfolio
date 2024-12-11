@@ -1,0 +1,30 @@
+
+#header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  position: sticky;
+  top: 0;
+}
+
+#header > div > p:nth-child(1) {
+  font-size: 36px;
+}
+#header > div > p > span {
+  font-size: 24px;
+}
+
+ul {
+  display: flex;
+  gap: 20px;
+}
+
+li {
+  list-style: none;
+}
+
+li > a > img {
+  /* height: 40px; */
+  width: 40px;
+}
