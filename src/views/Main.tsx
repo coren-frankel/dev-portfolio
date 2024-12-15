@@ -235,7 +235,7 @@ function Main() {
               <List.Item><Link to="https://github.com/danomatic/react-pdf-html">react-pdf-html</Link></List.Item>
               <List.Item><Link to="https://flask-cors.readthedocs.io/en/latest/index.html">Flask-CORS</Link></List.Item>
               <List.Item><Link to="https://github.com/marketplace/actions/todo-to-issue">TODO-to-Issue</Link> Github Action</List.Item>
-              <List.Item><Link to="https://github.com/LelouchFR/skill-icons">Skill Icons</Link>which provides tech skill icons uses throughout this page</List.Item>
+              <List.Item><Link to="https://github.com/LelouchFR/skill-icons">Skill Icons</Link> (which provides tech skill icons uses throughout this page)</List.Item>
             </List>
           </Card>
           <Typography.Title style={{ color: 'cyan' }}>And so much more...</Typography.Title>
