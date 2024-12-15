@@ -23,23 +23,27 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #000;
-  padding: 20px;
-  border-radius: 50%;
-  /* box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); */
 }
 
 pre {
-  line-height: 1.5;
   overflow-x: auto;
-  max-width: 600px;
+  width: 380px;
   margin: 0 auto;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
 .chunk {
   display: block;
-  opacity: 0;
-  animation: fade-in 1s linear;
+  padding-left: 1em;
+}
+
+.inline {
+  display: inline;
+  animation: fade-in 0.01s linear;
   animation-fill-mode: forwards;
+  opacity: 0;
 }
 
 /* TODO: make thick flashing cursor */
@@ -64,5 +68,6 @@ code {
 
 #command-line {
   border: none;
-  background-color: black;
+  background-color: #111;
+  font-size: 12px;
 }

@@ -17,16 +17,27 @@ const textChunks = [
 
 
 const TextChunks = (
-  { chunks, shortDelay = false }:
-    { chunks: string[], shortDelay?: boolean }) => {
+  { chunks, delay = 1 }:
+    { chunks: string[], delay?: number }) => {
   return (
     <>
-      {chunks
-        .map((chunk, chunkIdx) => (
-          <span key={`${shortDelay ? 'primary' : 'user-input'}-${chunkIdx}`} className="chunk" style={{ animationDelay: `${shortDelay ? 0.2 : chunkIdx}s` }}>
-            {chunk}
-          </span>
-        ))}
+      {chunks.flatMap((chunk, chunkIdx) => (
+        <span
+          key={`chunk-${delay ? 'pri' : 'com'}-${chunkIdx}`}
+          className='chunk'
+        >
+          {chunk.split('').map((char, idx) => (
+            <span
+              key={`${delay ? 'pri' : 'com'}-${idx * chunkIdx}`}
+              className="inline"
+              style={{ animationDelay: `${delay + (chunkIdx + idx * 0.025)}s` }}
+            >
+              {char}
+            </span>
+          ))}
+        </span>
+      ))
+      }
     </>
   )
 }
@@ -48,6 +59,11 @@ const Landing = () => {
       setChunkState([...chunkState, `% ${command}`]);
       setChunkState([...chunkState, `Redirecting to ${command[0].toUpperCase()}${command.substring(1).toLowerCase()} page...`]);
       setTimeout(() => navigate(`/${command.toLowerCase()}`), 1500);
+    } else if (command.match(/white rabbit/i)) {
+      setChunkState([...chunkState, 'Follow the white rabbit.']);
+      setTimeout(() => navigate("/thematrixhasyou"), 3000);
+    } else if (command.match(/clear/i)) {
+      setChunkState([]);
     } else {
       setChunkState([...chunkState, `Command: "${command}" not recognized`]);
     }
@@ -58,16 +74,18 @@ const Landing = () => {
     <div className='landing-page'>
       <div className="terminal lime">
         <pre>
-          <Typography.Paragraph code className='lime'>
+          <Typography.Paragraph code className='lime' id="code">
             <TextChunks chunks={textChunks} />
-            <TextChunks chunks={chunkState} shortDelay />
+            <TextChunks chunks={chunkState} delay={0.01} />
             <Input
               prefix={<PercentageOutlined className='lime' />}
               styles={{
-                prefix: { border: 'none', backgroundColor: 'black' },
-                affixWrapper: { border: 'none', backgroundColor: 'black' }
+                prefix: { border: 'none', backgroundColor: '#111' },
+                affixWrapper: { border: 'none', backgroundColor: '#111', boxShadow: 'none' }
               }}
               autoFocus
+              autoComplete='none'
+              aria-autocomplete='none'
               id="command-line"
               className='lime'
               contentEditable
