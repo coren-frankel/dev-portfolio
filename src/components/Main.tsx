@@ -25,6 +25,7 @@ import leaves5 from '../assets/leaves-5-svgrepo-com.svg';
 import mtn from '../assets/snow-mountain-svgrepo-com.svg';
 import tree from '../assets/tree-svgrepo-com.svg';
 import tree2 from '../assets/tree-2-svgrepo-com.svg';
+import { Image, Typography } from 'antd';
 
 function Main() {
   const parallax = useRef<IParallax>(null!);
@@ -66,35 +67,35 @@ function Main() {
         />
 
         <ParallaxLayer offset={1.3} speed={-0.3} style={{ pointerEvents: 'none' }}>
-          <img src={catcus} style={{ width: '15%', marginLeft: '70%' }} />
+          <Image src={catcus} width={'15%'} style={{ marginLeft: '70%' }} />
         </ParallaxLayer>
 
         <ParallaxLayer offset={1} speed={0.8} style={{ opacity: 0.1 }}>
-          <img src={cactus2} style={{ display: 'block', width: '20%', marginLeft: '55%' }} />
-          <img src={catcus} style={{ display: 'block', width: '10%', marginLeft: '15%' }} />
+          <Image src={cactus2} width={'20%'} style={{ display: 'block', marginLeft: '55%' }} />
+          <Image src={catcus} width={'10%'} style={{ display: 'block', marginLeft: '15%' }} />
         </ParallaxLayer>
 
         <ParallaxLayer offset={1.75} speed={0.5} style={{ opacity: 0.1 }}>
-          <img src={branch} style={{ display: 'block', width: '20%', marginLeft: '70%' }} />
-          <img src={leaf} style={{ display: 'block', width: '20%', marginLeft: '40%' }} />
-          <img src={fox} style={{ display: 'block', width: '10%', marginLeft: '20%' }} />
+          <Image src={branch} width={'20%'} style={{ display: 'block', marginLeft: '70%' }} />
+          <Image src={leaf} width={'20%'} style={{ display: 'block', marginLeft: '40%' }} />
+          <Image src={fox} width={'10%'} style={{ display: 'block', marginLeft: '20%' }} />
         </ParallaxLayer>
 
         <ParallaxLayer offset={1} speed={0.2} style={{ opacity: 0.2 }}>
-          <img src={leaves2} style={{ display: 'block', width: '10%', marginLeft: '10%' }} />
-          <img src={leaves4} style={{ display: 'block', width: '10%', marginLeft: '20%' }} />
-          <img src={leaves3} style={{ display: 'block', width: '20%', marginLeft: '70%' }} />
-          <img src={leaves5} style={{ display: 'block', width: '25%', marginLeft: '30%' }} />
+          <Image src={leaves2} width={'10%'} style={{ display: 'block', marginLeft: '10%' }} />
+          <Image src={leaves4} width={'10%'} style={{ display: 'block', marginLeft: '20%' }} />
+          <Image src={leaves3} width={'20%'} style={{ display: 'block', marginLeft: '70%' }} />
+          <Image src={leaves5} width={'25%'} style={{ display: 'block', marginLeft: '30%' }} />
         </ParallaxLayer>
 
         <ParallaxLayer offset={1.6} speed={-0.1} style={{ opacity: 0.4 }}>
-          <img src={bushes} style={{ display: 'block', width: '20%', marginLeft: '20%' }} />
-          <img src={tree} style={{ display: 'block', width: '10%', marginLeft: '80%' }} />
+          <Image src={bushes} width={'10%'} style={{ display: 'block', marginLeft: '20%' }} />
+          <Image src={tree} width={'20%'} style={{ display: 'block', marginLeft: '80%' }} />
         </ParallaxLayer>
 
         <ParallaxLayer offset={2.2} speed={0.4} style={{ opacity: 0.6 }}>
-          <img src={branch} style={{ display: 'block', width: '20%', marginLeft: '5%' }} />
-          <img src={tree2} style={{ display: 'block', width: '15%', marginLeft: '75%' }} />
+          <Image src={branch} width={'20%'} style={{ display: 'block', marginLeft: '5%' }} />
+          <Image src={tree2} width={'15%'} style={{ display: 'block', marginLeft: '75%' }} />
         </ParallaxLayer>
 
         <ParallaxLayer
@@ -106,7 +107,7 @@ function Main() {
             justifyContent: 'center',
             pointerEvents: 'none',
           }}>
-          <img src={mtn} style={{ width: '60%' }} />
+          <Image src={mtn} width={'20%'} />
         </ParallaxLayer>
 
         <ParallaxLayer
@@ -120,9 +121,9 @@ function Main() {
             justifyContent: 'center',
           }}>
           <h3>UI/UX Developer</h3>
-          <img src={web} style={{ width: '20%' }} />
-          <p>I am comfortable styling with vanilla CSS as well as various CSS frameworks and styled component libraries.</p>
-          <img src="https://go-skill-icons.vercel.app/api/icons?i=html,css,tailwind,bootstrap,materialui&theme=auto" alt="" />
+          <Image src={web} width={'20%'} />
+          <Typography.Paragraph>Proficiency in frontend languages & style frameworks including:</Typography.Paragraph>
+          <Image src="https://go-skill-icons.vercel.app/api/icons?i=html,css,js,ts,react,tailwind,bootstrap,materialui,reactnative,expo&theme=auto" alt="HTML, CSS, JavaScript, TypeScript, React, Tailwind CSS, Bootstrap, Material UI, React Native, Expo" />
         </ParallaxLayer>
 
         <ParallaxLayer
@@ -136,7 +137,9 @@ function Main() {
             justifyContent: 'center',
           }}>
           <h3>Full Stack Development</h3>
-          <img src={full} style={{ width: '20%' }} />
+          <Image src={full}  width={'20%'} />
+          <p>Experience in backend and full-stack frameworks like:</p>
+          <Image src="https://go-skill-icons.vercel.app/api/icons?i=node,remix,python,flask,java,spring&theme=auto" alt="Node.js, Remix, Python, Flask, Java, Spring" />
         </ParallaxLayer>
 
         <ParallaxLayer

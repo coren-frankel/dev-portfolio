@@ -14,7 +14,7 @@ const Scene = () => {
       <ambientLight intensity={0.5} />
       <directionalLight position={[1, 1, 1]} intensity={1.5} />
       <boxGeometry attach="geometry" />
-      <meshPhongMaterial attach="material" color={"gold"} />
+      <meshPhongMaterial attach="material" color={"magenta"} />
     </mesh>
   )
 }
