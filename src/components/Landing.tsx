@@ -47,13 +47,17 @@ const Landing = () => {
   const [chunkState, setChunkState] = useState<string[]>([]);
   const navigate = useNavigate();
 
-  // Add visible class to the page to initiate fade in animation
+  // Add visible class for fade-in animation
   useEffect(() => {
     document.querySelector('.landing-page')?.classList.add('visible');
     return () => document.querySelector('.landing-page')?.classList.remove('visible');
   }, []);
 
-
+  // TODO: Add more hidden routes and terminal commands
+  // labels: enhancement
+  // iframe of NinjaSweeper https://coren-frankel.github.io/NinjaSweeper/
+  
+  // Home page navigation
   const acceptInputCommand = useCallback((command: string) => {
     if (command.match(/about/i) || command.match(/contact/i) || command.match(/home/i)) {
       setChunkState([...chunkState, `% ${command}`]);
@@ -61,7 +65,7 @@ const Landing = () => {
       setTimeout(() => navigate(`/${command.toLowerCase()}`), 1500);
     } else if (command.match(/white rabbit/i)) {
       setChunkState([...chunkState, 'Follow the white rabbit.']);
-      setTimeout(() => navigate("/thematrixhasyou"), 3000);
+      setTimeout(() => navigate("/the-matrix-has-you"), 3000);
     } else if (command.match(/clear/i)) {
       setChunkState([]);
     } else {
