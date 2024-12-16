@@ -120,7 +120,7 @@ function Main() {
             cover={
               <Image
                 style={{ height: '100px' }}
-                src="https://go-skill-icons.vercel.app/api/icons?i=react,tailwind,bootstrap,materialui,reactnative,expo&theme=auto"
+                src="https://go-skill-icons.vercel.app/api/icons?i=react,tailwind,bootstrap,materialui,reactnative,expo&perline=3&theme=auto"
                 alt="React, Tailwind CSS, Bootstrap, Material UI, React Native, Expo"
                 />
               }

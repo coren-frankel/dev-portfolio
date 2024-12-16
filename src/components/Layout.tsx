@@ -20,7 +20,8 @@ const items = [
   {
     key: 5, label: (
       <a className="nav-link" href="https://github.com/coren-frankel">
-        <GithubOutlined />
+        <GithubOutlined />{" "}
+        Github
       </a>
     )
   },
@@ -28,7 +29,8 @@ const items = [
     key: 6,
     label: (
       <a className="nav-link" href="https://linkedin.com/in/coren-frankel">
-        <LinkedinOutlined />
+        <LinkedinOutlined />{" "}
+        LinkedIn
       </a>
     )
   },
@@ -36,7 +38,8 @@ const items = [
     key: 7,
     label: (
       <a className="nav-link" href="mailto:dev@corenfrankel.com">
-        <MailOutlined />
+        <MailOutlined />{" "}
+        Email
       </a>
     )
   },
