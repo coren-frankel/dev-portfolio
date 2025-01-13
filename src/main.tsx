@@ -6,6 +6,7 @@ import App from './App.tsx'
 import Main from './views/Main.tsx';
 import Matrix from './components/Matrix.tsx';
 import About from './views/About.tsx';
+import Arcade from './views/Arcade.tsx';
 import Contact from './views/Contact.tsx';
 
 createRoot(document.getElementById('root')!).render(
@@ -15,6 +16,7 @@ createRoot(document.getElementById('root')!).render(
         <Route index element={<App />} />
         <Route path="home" element={<Main />} />
         <Route path="about" element={<About />} />
+        <Route path="arcade" element={<Arcade />} />
         <Route path="contact" element={<Contact />} />
         <Route path="the-matrix-has-you" element={<Matrix />} />
       </Routes>
