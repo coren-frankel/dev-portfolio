@@ -22,13 +22,20 @@ import leaves5 from '../assets/leaves-5-svgrepo-com.svg';
 import mtn from '../assets/snow-mountain-svgrepo-com.svg';
 import tree from '../assets/tree-svgrepo-com.svg';
 import tree2 from '../assets/tree-2-svgrepo-com.svg';
-import { Card, Image, List, Typography } from 'antd';
+import { Avatar, Card, Grid, Image, List, Typography } from 'antd';
+import { HeartTwoTone } from '@ant-design/icons';
 import { Link } from 'react-router';
+
+const { useBreakpoint } = Grid;
 
 function Main() {
   const parallax = useRef<IParallax>(null!);
+  const screens = useBreakpoint();
+  const sm = () => Object.entries(screens)
+    .filter(screen => !!screen[1])
+    .some(screen => screen[0] === 'sm');
   return (
-    <Layout navKey={1}>
+    <Layout>
       <Parallax ref={parallax} pages={4}>
         <ParallaxLayer offset={1} speed={1} style={{ backgroundColor: '#805E73' }} />
         <ParallaxLayer offset={2} speed={1} style={{ backgroundColor: '#87BCDE' }} />
@@ -94,38 +101,43 @@ function Main() {
           onClick={() => parallax.current.scrollTo(1)}
           style={{
             display: 'flex',
-            gap: '40px', 
+            gap: '40px',
+            flexDirection: sm() ? 'row' : 'column',
             alignItems: 'center',
-            justifyContent: 'center',
+            justifyContent: 'space-around',
           }}>
           <Card
-            style={{ maxWidth: '350px', padding: '10px', alignSelf: 'end', marginBottom: '80px' }}
-            title="Programming Languages"
+            style={{ maxWidth: '400px', padding: '10px' }}
             hoverable
             cover={
               <Image
                 style={{ height: '100px' }}
-                src="https://go-skill-icons.vercel.app/api/icons?i=html,css,js,ts,python,java,md,yaml&perline=4&theme=auto"
-                alt="HTML, CSS, JavaScript, TypeScript, Python, Java, Markdown, YAML"
+                src="https://go-skill-icons.vercel.app/api/icons?i=html,css,js,ts,python,java&perline=6&theme=auto"
+                alt="HTML, CSS, JavaScript, TypeScript, Python, Java"
               />
             }
           >
-            I'm an aspiring polyglot, proficient with multiple languages and syntaxes like these.
+            <Card.Meta
+              title="Programming Languages"
+              description="I'm an aspiring polyglot, proficient with multiple languages and syntaxes like these"
+            />
           </Card>
-          <Image preview={false} src={web} width={'20%'} />
+          <Image preview={false} src={web} width={sm() ? '20%' : '80%'} />
           <Card
-            style={{ maxWidth: '350px', padding: '10px', alignSelf: 'start', marginTop: '80px' }}
-            title="Frontend libraries & frameworks"
+            style={{ maxWidth: '400px', padding: '10px' }}
             hoverable
             cover={
               <Image
                 style={{ height: '100px' }}
-                src="https://go-skill-icons.vercel.app/api/icons?i=react,tailwind,bootstrap,materialui,reactnative,expo&perline=3&theme=auto"
-                alt="React, Tailwind CSS, Bootstrap, Material UI, React Native, Expo"
-                />
-              }
-              >
-            I've used various progressive style libraries and frameworks, most notably in the React ecosystem.
+                src="https://go-skill-icons.vercel.app/api/icons?i=react,tailwind,bootstrap,materialui,reactnative,expo,reactquery,threejs&perline=4&theme=auto"
+                alt="React, Tailwind CSS, Bootstrap, Material UI, React Native, Expo, React Query, Three.js"
+              />
+            }
+          >
+            <Card.Meta
+              title="Frontend libraries & frameworks"
+              description="I've used various progressive style libraries and frameworks, most notably in the React ecosystem"
+            />
           </Card>
         </ParallaxLayer>
 
@@ -135,38 +147,43 @@ function Main() {
           onClick={() => parallax.current.scrollTo(2)}
           style={{
             display: 'flex',
-            gap: '50px',
+            gap: '40px',
+            flexDirection: sm() ? 'row' : 'column',
             alignItems: 'center',
             justifyContent: 'center',
           }}>
           <Card
-            style={{ maxWidth: '350px', padding: '10px', alignSelf: 'start', marginTop: '80px' }}
-            title="Full Stack Development"
+            style={{ maxWidth: '400px', padding: '10px' }}
             hoverable
             cover={
               <Image
                 style={{ height: '100px' }}
-                src="https://go-skill-icons.vercel.app/api/icons?i=nodejs,deno,remix,npm,pnpm,yarn,flask,maven,spring,graphql&perline=5&theme=auto"
-                alt="Node.js, Deno, Remix, npm, pnpm, Yarn, Flask, Maven, Spring, GraphQL"
+                src="https://go-skill-icons.vercel.app/api/icons?i=nodejs,deno,remix,npm,pnpm,yarn,flask,maven,spring,graphql,express&perline=6&theme=auto"
+                alt="Node.js, Deno, Remix, npm, pnpm, Yarn, Flask, Maven, Spring, GraphQL, Express"
               />
             }
           >
-            I utilize various backend, full-stack technologies, package managers & runtimes like:
+            <Card.Meta
+              title="Backend & Full Stack Development"
+              description="I utilize various backend, full-stack technologies, package managers & runtimes"
+            />
           </Card>
-          <Image preview={false} src={full} width={'20%'} />
+          <Image preview={false} src={full} width={sm() ? '20%' : '80%'} />
           <Card
-            style={{ maxWidth: '350px', padding: '10px', alignSelf: 'end', marginBottom: '80px' }}
-            title="Data Persistence Tools"
+            style={{ maxWidth: '400px', padding: '10px' }}
             hoverable
             cover={
               <Image
                 style={{ height: '100px' }}
-                src="https://go-skill-icons.vercel.app/api/icons?i=postgres,mysql,supabase,redis,mongodb,sqlite,prisma,sqlalchemy&perline=4&theme=auto"
-                alt="PostgreSQL, MySQL, Supabase, Redis, MongoDB, SQLite, Prisma, SQLAlchemy"
+                src="https://go-skill-icons.vercel.app/api/icons?i=postgres,mysql,supabase,redis,mongodb,sqlite,prisma,sqlalchemy,mongoose,bigquery&perline=5&theme=auto"
+                alt="PostgreSQL, MySQL, Supabase, Redis, MongoDB, SQLite, Prisma, SQLAlchemy, Mongoose, BigQuery"
               />
             }
           >
-            Using RDMSs, BaaS, ORMs, SQL & NoSQL I'm comfortable drafting raw DDL, utilizing migration tools, and performing ETL.
+            <Card.Meta
+              title="Data Persistence Tools"
+              description="Using RDMSs, BaaS, ORMs, SQL & NoSQL I'm comfortable drafting raw DDL, utilizing migration tools, and performing ETL"
+            />
           </Card>
         </ParallaxLayer>
 
@@ -176,38 +193,43 @@ function Main() {
           onClick={() => parallax.current.scrollTo(3)}
           style={{
             display: 'flex',
-            gap: '50px',
+            gap: '40px',
+            flexDirection: sm() ? 'row' : 'column',
             alignItems: 'center',
             justifyContent: 'center',
           }}>
           <Card
-            style={{ maxWidth: '350px', padding: '10px', alignSelf: 'end', marginBottom: '80px' }}
-            title="Cloud Providers, DevOps Tools"
+            style={{ maxWidth: '400px', padding: '10px' }}
             hoverable
             cover={
               <Image
                 style={{ height: '100px' }}
-                src="https://go-skill-icons.vercel.app/api/icons?i=docker,ghactions,digitalocean,vercel,render,ngrok,cloudflare,aws,yaml,gcp&perline=5&theme=auto"
-                alt="Docker, Github Actions, Vercel, Render, Ngrok, Cloudflare, AWS EC2, YAML, Google Cloud Platform"
+                src="https://go-skill-icons.vercel.app/api/icons?i=docker,ghactions,digitalocean,vercel,render,ngrok,cloudflare,aws,gcp&perline=5&theme=auto"
+                alt="Docker, Github Actions, Vercel, Render, Ngrok, Cloudflare, AWS EC2, Google Cloud Platform"
               />
             }
           >
-            Development tools that streamline my code to production:
+            <Card.Meta
+              title="Cloud Providers, DevOps Tools"
+              description="Development tools that streamline my code to production"
+            />
           </Card>
-          <Image preview={false} src={sql} width={'20%'} />
+          <Image preview={false} src={sql} width={sm() ? '20%' : '80%'} />
           <Card
-            style={{ maxWidth: '350px', padding: '10px', alignSelf: 'start', marginBottom: '80px' }}
-            title="IDEs, Developer Tools, & OS"
+            style={{ maxWidth: '400px', padding: '10px' }}
             hoverable
             cover={
               <Image
                 style={{ height: '100px' }}
-                src="https://go-skill-icons.vercel.app/api/icons?i=vscode,idea,postman,xcode,androidstudio,apple,linux&perline=4&theme=auto"
-                alt="VS Code, IntelliJ Idea, Postman, Terminal, Xcode, Android Studio, Apple, Linux"
+                src="https://go-skill-icons.vercel.app/api/icons?i=vscode,idea,postman,terminal,xcode,android,androidstudio,apple,linux,ubuntu,eclipse&perline=6&theme=auto"
+                alt="VS Code, IntelliJ Idea, Postman, Terminal, Xcode, Android, Android Studio, Apple, Linux, Ubuntu, Eclipse"
               />
             }
           >
-            As of late, these have been my most used IDEs and OSs
+            <Card.Meta
+              title="GUIs, IDEs, Developer Tools, & OS"
+              description="As of late, these are my most used Interactive Development Environments and Operating Systems"
+            />
           </Card>
         </ParallaxLayer>
 
@@ -219,7 +241,7 @@ function Main() {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundSize: '90%',
+            backgroundSize: '100%',
             backgroundPosition: 'center',
             backgroundImage: mtn,
           }}
@@ -227,16 +249,27 @@ function Main() {
           <Canvas style={{ marginBottom: '-200px' }}>
             <Scene />
           </Canvas>
-          <Card style={{ maxWidth: '350px', padding: '10px', alignSelf: 'end', marginRight: '20px' }} title="Open Source Contributor">
-            I enjoy becoming a part of the packages that I use in my work, and find more meaning in tools that others use.
-            You can find my contributions to various projects including:
-            <List>
-              <List.Item><Link to="https://react-pdf.org/">React-PDF</Link></List.Item>
-              <List.Item><Link to="https://github.com/danomatic/react-pdf-html">react-pdf-html</Link></List.Item>
-              <List.Item><Link to="https://flask-cors.readthedocs.io/en/latest/index.html">Flask-CORS</Link></List.Item>
-              <List.Item><Link to="https://github.com/marketplace/actions/todo-to-issue">TODO-to-Issue</Link> Github Action</List.Item>
-              <List.Item><Link to="https://github.com/LelouchFR/skill-icons">Skill Icons</Link> (which provides tech skill icons uses throughout this page)</List.Item>
-            </List>
+          <Card
+            style={{ maxWidth: '500px', alignSelf: 'end', right: 20 }}
+          >
+            <Card.Meta
+              title="Open Source Contributor"
+              avatar={<Avatar icon={<HeartTwoTone twoToneColor="#eb2f96" />} size="large" />}
+              description={
+                <List
+                  size="small"
+                  header={<Typography.Paragraph>
+                    Find my contributions to various projects on Github, including (but not limited to):
+                  </Typography.Paragraph>}
+                >
+                  <List.Item><Link to="https://react-pdf.org/" target="_blank">react-pdf</Link> - React renderer for creating PDF files on the browser and server</List.Item>
+                  <List.Item><Link to="https://github.com/danomatic/react-pdf-html" target="_blank">react-pdf-html</Link> - HTML component for react-pdf</List.Item>
+                  <List.Item><Link to="https://flask-cors.readthedocs.io/en/latest/index.html" target="_blank">Flask-CORS</Link> - A Flask extension for handling Cross Origin Resource Sharing (CORS)</List.Item>
+                  <List.Item><Link to="https://github.com/marketplace/actions/todo-to-issue" target="_blank">TODO-to-Issue</Link> Github Action to create, update and close issues based on committed TODO comments</List.Item>
+                  <List.Item><Link to="https://github.com/LelouchFR/skill-icons" target="_blank">Skill Icons</Link> - technology skills icon API (provides icons throughout this page)</List.Item>
+                </List>
+              }
+            />
           </Card>
           <Typography.Title style={{ color: 'cyan' }}>And so much more...</Typography.Title>
           <Typography.Paragraph style={{ color: 'orange' }}>This site is under construction and incomplete. Check back soon.</Typography.Paragraph>

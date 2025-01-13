@@ -4,7 +4,7 @@ import { Link } from 'react-router'
 
 const About = () => {
   return (
-    <Layout navKey={2} style={{}}>
+    <Layout style={{}}>
       <Card
         title="About Me"
         styles={{ title: { color: 'lavender' } }}
