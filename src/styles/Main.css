@@ -1,3 +1,23 @@
 .block {
   display: block;
 }
+
+.box {
+  width: 70px;
+  border-radius: 15px;
+  background: #fff;
+  color: #000;
+  padding: 20px;
+  text-align: center;
+  font-weight: 900;
+  font-family: arial;
+  position: absolute;
+}
+
+.sb:before {
+  position: relative;
+  border-left: 15px solid #fff;
+  border-right: 15px solid transparent;
+  border-top: 15px solid #fff;
+  border-bottom: 15px solid transparent;
+}

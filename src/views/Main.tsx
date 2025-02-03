@@ -1,3 +1,4 @@
+import "../styles/Main.css";
 import { Layout } from '../components/Layout';
 import { useRef } from 'react';
 import { Parallax, ParallaxLayer, type IParallax } from '@react-spring/parallax';
@@ -75,12 +76,15 @@ function Main() {
         <ParallaxLayer offset={2.3} speed={-0.1} style={{ opacity: 0.4 }}>
           <img src={bushes} width={'10%'} className="block" style={{ marginLeft: '20%' }} />
           <img src={tree} width={'20%'} className="block" style={{ marginLeft: '60%' }} />
+          <img src={tree2} width={'15%'} className="block" style={{ marginLeft: '75%' }} />
         </ParallaxLayer>
 
         <ParallaxLayer offset={3.2} speed={0.4} style={{ opacity: 0.6 }}>
-          <img src={branch} width={'20%'} className="block" style={{ marginLeft: '5%', marginTop: '15%' }} />
-          <img src={deer} width={'25%'} className="block" style={{ marginLeft: '10%' }} />
-          <img src={tree2} width={'15%'} className="block" style={{ marginLeft: '75%' }} />
+          <img src={branch} width={'20%'} className="block" style={{ marginLeft: '5%', marginTop: '5%' }} />
+          <div className="block" style={{ marginLeft: '25%' }}>
+            <div className="box sb">Eyo!</div>
+            <img src={deer} width={'30%'} />
+          </div>
         </ParallaxLayer>
 
         <ParallaxLayer
@@ -112,14 +116,14 @@ function Main() {
             cover={
               <Image
                 style={{ height: '100px' }}
-                src="https://go-skill-icons.vercel.app/api/icons?i=html,css,js,ts,python,java&perline=6&theme=auto"
-                alt="HTML, CSS, JavaScript, TypeScript, Python, Java"
+                src="https://go-skill-icons.vercel.app/api/icons?i=md,html,css,js,ts,python,java,graphql&perline=4&theme=auto"
+                alt="Markdown, HTML, CSS, JavaScript, TypeScript, Python, Java, GraphQL"
               />
             }
           >
             <Card.Meta
-              title="Programming Languages"
-              description="I'm an aspiring polyglot, proficient with multiple languages and syntaxes like these"
+              title="Programming & Query Languages"
+              description="I'm an aspiring polyglot, proficient in these languages and syntaxes, among others"
             />
           </Card>
           <Image preview={false} src={web} width={sm() ? '20%' : '80%'} />
@@ -129,8 +133,8 @@ function Main() {
             cover={
               <Image
                 style={{ height: '100px' }}
-                src="https://go-skill-icons.vercel.app/api/icons?i=react,tailwind,bootstrap,materialui,reactnative,expo,reactquery,threejs&perline=4&theme=auto"
-                alt="React, Tailwind CSS, Bootstrap, Material UI, React Native, Expo, React Query, Three.js"
+                src="https://go-skill-icons.vercel.app/api/icons?i=tailwind,bootstrap,materialui,react,reactnative,expo,threejs&perline=4&theme=auto"
+                alt="Tailwind CSS, Bootstrap, Material UI, React, React Native, Expo, Three.js"
               />
             }
           >
@@ -158,8 +162,8 @@ function Main() {
             cover={
               <Image
                 style={{ height: '100px' }}
-                src="https://go-skill-icons.vercel.app/api/icons?i=nodejs,deno,remix,npm,pnpm,yarn,flask,maven,spring,graphql,express&perline=6&theme=auto"
-                alt="Node.js, Deno, Remix, npm, pnpm, Yarn, Flask, Maven, Spring, GraphQL, Express"
+                src="https://go-skill-icons.vercel.app/api/icons?i=nodejs,deno,remix,npm,pnpm,flask,maven,spring,express&perline=5&theme=auto"
+                alt="Node.js, Deno, Remix, npm, pnpm, Flask, Maven, Spring, Express"
               />
             }
           >
@@ -204,8 +208,8 @@ function Main() {
             cover={
               <Image
                 style={{ height: '100px' }}
-                src="https://go-skill-icons.vercel.app/api/icons?i=docker,ghactions,digitalocean,vercel,render,ngrok,cloudflare,aws,gcp&perline=5&theme=auto"
-                alt="Docker, Github Actions, Vercel, Render, Ngrok, Cloudflare, AWS EC2, Google Cloud Platform"
+                src="https://go-skill-icons.vercel.app/api/icons?i=docker,ghactions,digitalocean,vercel,render,ngrok,cloudflare,aws,gcp,sentry,snyk&perline=6&theme=auto"
+                alt="Docker, Github Actions, Vercel, Render, Ngrok, Cloudflare, AWS EC2, Google Cloud Platform, Sentry, Snyk"
               />
             }
           >
