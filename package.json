@@ -8,6 +8,7 @@
     "dev": "vite",
     "lint": "eslint .",
     "prepare": "husky || true",
+    "typecheck": "tsc --noEmit",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -54,7 +55,7 @@
       "eslint --cache --fix"
     ],
     "*.{ts,tsx}": [
-      "tsc --noEmit"
+      "bash -c 'pnpm typecheck'"
     ]
   }
 }
