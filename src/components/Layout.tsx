@@ -25,6 +25,7 @@ const angle = 75;
 const items = [
   {
     key: 1,
+    path: "/home",
     label: (
       <NavLink className="nav-link" to="/home">
         Home
@@ -33,6 +34,7 @@ const items = [
   },
   {
     key: 2,
+    path: "/about",
     label: (
       <NavLink className="nav-link" to="/about">
         About
@@ -41,6 +43,7 @@ const items = [
   },
   {
     key: 3,
+    path: "/contact",
     label: (
       <NavLink className="nav-link" to="/contact">
         Contact
@@ -49,6 +52,7 @@ const items = [
   },
   {
     key: 4,
+    path: "/arcade",
     label: (
       <NavLink className="nav-link" to="/arcade">
         Arcade
@@ -57,6 +61,7 @@ const items = [
   },
   {
     key: 5,
+    path: "/",
     label: (
       <NavLink className="nav-link" to="/">
         ???
@@ -106,7 +111,8 @@ export const Layout = ({
 
   const { pathname: location } = useLocation();
   useEffect(() => {
-    setVisible(false);
+    // console.log("location changed", location);
+    // setVisible(false);
   }, [location]);
 
   const { colorFrom, colorMid, colorTo } = useSpring({
@@ -146,14 +152,22 @@ export const Layout = ({
         {Object.entries(screens)
           .filter((screen) => !!screen[1])
           .some((screen) => screen[0] === "md") ? (
-          <Menu theme="dark" mode="horizontal" items={items} />
+          <Menu
+            theme="dark"
+            mode="horizontal"
+            items={items.filter((i) => i.path !== location)}
+          />
         ) : (
           <>
             <Button type="text" onClick={showDrawer}>
               <MenuOutlined style={{ color: "#fff" }} size={24} />
             </Button>
             <Drawer placement="right" onClose={showDrawer} open={visible}>
-              <Menu theme="dark" mode="inline" items={items} />
+              <Menu
+                theme="dark"
+                mode="inline"
+                items={items.filter((i) => i.path !== location)}
+              />
             </Drawer>
           </>
         )}
