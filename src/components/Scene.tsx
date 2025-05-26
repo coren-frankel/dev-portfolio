@@ -2,11 +2,10 @@ import { useRef, useState } from "react";
 import { useFrame } from "@react-three/fiber";
 import { Mesh } from "three";
 
-
-const characters = '0123456789ABCDEF';
+const characters = "0123456789ABCDEF";
 
 function getRandomColor() {
-  let hexcode = '#';
+  let hexcode = "#";
   for (let i = 0; i < 6; i++) {
     hexcode += characters[Math.floor(Math.random() * 16)];
   }
@@ -26,14 +25,20 @@ const Scene = () => {
 
     setColor((prevColor) => {
       const changedIndex = Math.floor(Math.random() * 6) + 1;
-      const newColor = prevColor.split('');
+      const newColor = prevColor.split("");
       const charIndex = characters.indexOf(newColor[changedIndex]);
       const charsLen = characters.length;
-      newColor[changedIndex] = characters[
-        Math.floor(Math.random() * 2)
-          ? (charIndex === charsLen ? 0 : charIndex + 1)
-          : (charIndex === 0 ? charsLen : charIndex - 1)];
-      return newColor.join('');
+      newColor[changedIndex] =
+        characters[
+          Math.floor(Math.random() * 2)
+            ? charIndex === charsLen
+              ? 0
+              : charIndex + 1
+            : charIndex === 0
+              ? charsLen
+              : charIndex - 1
+        ];
+      return newColor.join("");
     });
   });
   return (
