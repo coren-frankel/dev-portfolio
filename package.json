@@ -7,7 +7,7 @@
     "build": "tsc -b && vite build",
     "dev": "vite",
     "lint": "eslint .",
-    "prepare": "husky && husky install",
+    "prepare": "husky || true",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -48,9 +48,13 @@
   },
   "lint-staged": {
     "*": [
-      "eslint --cache --fix",
-      "tsc --noEmit",
       "prettier --write ."
+    ],
+    "*.{js,ts,jsx,tsx}": [
+      "eslint --cache --fix"
+    ],
+    "*.{ts,tsx}": [
+      "tsc --noEmit"
     ]
   }
 }
