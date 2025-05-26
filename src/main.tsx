@@ -1,15 +1,15 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router";
-import './index.css'
-import App from './App.tsx'
-import Main from './views/Main.tsx';
-import Matrix from './components/Matrix.tsx';
-import About from './views/About.tsx';
-import Arcade from './views/Arcade.tsx';
-import Contact from './views/Contact.tsx';
+import "./index.css";
+import App from "./App.tsx";
+import Main from "./views/Main.tsx";
+import Matrix from "./components/Matrix.tsx";
+import About from "./views/About.tsx";
+import Arcade from "./views/Arcade.tsx";
+import Contact from "./views/Contact.tsx";
 
-createRoot(document.getElementById('root')!).render(
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
@@ -22,4 +22,4 @@ createRoot(document.getElementById('root')!).render(
       </Routes>
     </BrowserRouter>
   </StrictMode>,
-)
+);
