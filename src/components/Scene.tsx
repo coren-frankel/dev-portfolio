@@ -31,11 +31,11 @@ const Scene = () => {
       newColor[changedIndex] =
         characters[
           Math.floor(Math.random() * 2)
-            ? charIndex === charsLen
+            ? charIndex + 1 === charsLen
               ? 0
               : charIndex + 1
             : charIndex === 0
-              ? charsLen
+              ? charsLen - 1
               : charIndex - 1
         ];
       return newColor.join("");
