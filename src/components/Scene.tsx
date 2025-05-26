@@ -1,13 +1,13 @@
-import { useRef } from 'react';
-import { useFrame } from '@react-three/fiber';
-import { Mesh } from 'three';
+import { useRef } from "react";
+import { useFrame } from "@react-three/fiber";
+import { Mesh } from "three";
 
 const Scene = () => {
   const myMesh = useRef<Mesh>(null!);
   useFrame(({ clock }) => {
-    myMesh.current.rotation.x = clock.getElapsedTime()
-    myMesh.current.rotation.y = clock.getElapsedTime()
-    myMesh.current.rotation.z = clock.getElapsedTime()
+    myMesh.current.rotation.x = clock.getElapsedTime();
+    myMesh.current.rotation.y = clock.getElapsedTime();
+    myMesh.current.rotation.z = clock.getElapsedTime();
   });
   return (
     <mesh rotation={[10, 10, 10]} ref={myMesh}>
@@ -16,7 +16,7 @@ const Scene = () => {
       <octahedronGeometry attach="geometry" />
       <meshPhongMaterial attach="material" color={"magenta"} />
     </mesh>
-  )
-}
+  );
+};
 
-export default Scene
+export default Scene;

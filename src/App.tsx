@@ -1,10 +1,8 @@
-import './App.css';
-import Landing from './components/Landing';
+import "./App.css";
+import Landing from "./components/Landing";
 
 function App() {
-  return (
-    <Landing />
-  )
+  return <Landing />;
 }
 
-export default App
+export default App;
