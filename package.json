@@ -8,7 +8,7 @@
     "dev": "vite",
     "lint": "eslint .",
     "prepare": "husky || true",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc-files --noEmit",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -43,6 +43,7 @@
     "husky": "^9.1.7",
     "lint-staged": "^16.0.0",
     "prettier": "^3.5.3",
+    "tsc-files": "^1.1.4",
     "typescript": "5.7.2",
     "typescript-eslint": "^8.32.1",
     "vite": "^6.3.5"
@@ -55,7 +56,7 @@
       "eslint --cache --fix"
     ],
     "*.{ts,tsx}": [
-      "bash -c 'pnpm typecheck'"
+      "pnpm typecheck"
     ]
   }
 }
