@@ -3,3 +3,9 @@
 /assets
 .prettierignore
 .gitignore
+
+# ignore image files
+*.png
+*.jpg
+*.ico
+*.svg
