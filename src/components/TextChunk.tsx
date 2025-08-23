@@ -1,22 +1,9 @@
-const textChunks = [
-  'Hiya! I\'m Coren, but some call me "Kern".',
-  "I'm a Software Developer from Denver, CO.",
-  "Welcome to my personal website!",
-  "Here's how to navigate:",
-  "Type 'home' to go to the home page",
-  "Type 'about' to learn more about me",
-  "Hint: Press the Enter key to execute a command",
-];
-
 interface TextChunkProps {
-  chunks?: string[];
+  chunks: string[];
   delay?: number;
 }
 
-export default function TextChunk({
-  chunks = textChunks,
-  delay = 1,
-}: TextChunkProps) {
+export default function TextChunk({ chunks, delay = 1 }: TextChunkProps) {
   return (
     <>
       {chunks.flatMap((chunk, chunkIdx) => (
@@ -24,7 +11,7 @@ export default function TextChunk({
           key={`chunk-${delay === 1 ? "pri" : "com"}-${chunkIdx}`}
           className="chunk"
           style={{
-            animationDelay: `${delay + chunkIdx * 2}s`,
+            animationDelay: `${delay + chunkIdx * 1.5}s`,
           }}
         >
           {chunk.split("").map((char, idx) => (
@@ -32,7 +19,7 @@ export default function TextChunk({
               key={`${delay === 1 ? "pri" : "com"}-${(idx + 1) * (chunkIdx + 1)}`}
               className="inline"
               style={{
-                animationDelay: `${delay + chunkIdx * 1 + idx * 0.025}s`,
+                animationDelay: `${delay + chunkIdx * 0.9 + idx * 0.025}s`,
               }}
             >
               {char}
