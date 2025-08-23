@@ -49,24 +49,19 @@ const Landing = () => {
   // Home page navigation
   const acceptInputCommand = useCallback(
     (command: string) => {
-      if (
-        command.match(/about/i) ||
-        command.match(/contact/i) ||
-        command.match(/home/i) ||
-        command.match(/arcade/i)
-      ) {
+      if (/about|contact|home|arcade/i.test(command)) {
         setChunkState([...chunkState, `% ${command}`]);
         setChunkState([
           ...chunkState,
-          `Redirecting to ${command[0].toUpperCase()}${command.substring(1).toLowerCase()} page...`,
+          `Redirecting to ${command[0].toUpperCase()}${command.slice(1).toLowerCase()} page...`,
         ]);
         setTimeout(() => navigate(`/${command.toLowerCase()}`), 1500);
-      } else if (command.match(/white rabbit/i)) {
+      } else if (/white rabbit/i.test(command)) {
         setChunkState([...chunkState, "Follow the White Rabbit..."]);
         setTimeout(() => navigate("/the-matrix-has-you"), 3000);
-      } else if (command.match(/clear/i)) {
+      } else if (/clear/i.test(command)) {
         setChunkState([]);
-      } else if (command.match(/help/i)) {
+      } else if (/help/i.test(command)) {
         setChunkState([]);
         setWakeUp(false);
       } else {
@@ -79,26 +74,23 @@ const Landing = () => {
 
   return (
     <div className="landing-page">
-      <div className="terminal lime">
+      <div className="terminal lavender">
         <pre>
-          <Typography.Paragraph code className="lime" id="code">
+          <Typography.Paragraph code className="lavender" id="code">
             {!wakeUp && <TextChunk />}
             <TextChunk chunks={chunkState} delay={0.01} />
             <Input
-              prefix={<PercentageOutlined className="lime" />}
-              styles={{
-                prefix: { border: "none", backgroundColor: "#110" },
-                affixWrapper: {
-                  border: "none",
-                  backgroundColor: "#110",
-                  boxShadow: "none",
-                },
+              prefix={<PercentageOutlined className="lavender" />}
+              style={{
+                border: "none",
+                backgroundColor: "#110",
+                boxShadow: "none",
               }}
               autoFocus
               autoComplete="none"
               aria-autocomplete="none"
               id="command-line"
-              className="lime"
+              className="lavender"
               contentEditable
               value={command}
               onChange={(event) => setCommand(event.target.value)}

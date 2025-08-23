@@ -186,7 +186,7 @@ export const Layout = ({
         </animated.div>
       </Content>
       <Footer style={{ textAlign: "center", zIndex: 2 }}>
-        Coren "Kern" Frankel ©{new Date().getFullYear()}
+        Coren &quot;Kern&quot; Frankel ©{new Date().getFullYear()}
       </Footer>
     </AntdLayout>
   );

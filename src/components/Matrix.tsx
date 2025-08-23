@@ -1,5 +1,7 @@
 const Matrix = () => {
   return (
+    // Ignore iframe complaint about sandbox to allow embedded youtube video
+    // oxlint-disable
     <iframe
       width="560"
       height="315"
@@ -12,7 +14,6 @@ const Matrix = () => {
       }}
       src="https://www.youtube.com/embed/6IDT3MpSCKI?si=kMcbLG6e0OUIcVCR"
       title="YouTube video player"
-      frameBorder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
       referrerPolicy="strict-origin-when-cross-origin"
       allowFullScreen

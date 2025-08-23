@@ -9,7 +9,7 @@ import About from "./views/About.tsx";
 import Arcade from "./views/Arcade.tsx";
 import Contact from "./views/Contact.tsx";
 
-createRoot(document.getElementById("root")!).render(
+createRoot(document.querySelector("#root")!).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>

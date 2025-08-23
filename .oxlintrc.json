@@ -7,15 +7,13 @@
   "plugins": ["react", "typescript", "unicorn", "oxc"],
   "rules": {
     "react-hooks/exhaustive-deps": "warn",
-    "react-refresh/only-export-components": [
-      "warn",
-      { "allowConstantExport": true }
-    ],
     "react/react-in-jsx-scope": "off",
     "no-console": "warn",
     "no-debugger": "error",
     "max-lines": "off",
-    "max-lines-per-function": "off"
+    "max-lines-per-function": "off",
+    "max-nested-callbacks": "off",
+    "max-depth": "off"
   },
   "env": {
     "browser": true,
@@ -23,7 +21,7 @@
   },
   "settings": {
     "react": {
-      "version": "18.3",
+      "version": "19.1",
       "jsx": "react-jsx"
     }
   },

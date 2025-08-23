@@ -1,12 +1,12 @@
 const textChunks = [
-  'Hiya! I\'m Coren, but some call me "Kern"',
-  "I'm a Software Developer from Denver, CO",
+  'Hiya! I\'m Coren, but some call me "Kern".',
+  "I'm a Software Developer from Denver, CO.",
   "Welcome to my personal website!",
   "Here's how to navigate:",
   "Type 'home' to go to the home page",
   "Type 'about' to learn more about me",
   "Type 'contact' to reach out",
-  "Press Enter to execute command",
+  "Press the Enter key to execute a command",
 ];
 
 interface TextChunkProps {
@@ -29,7 +29,9 @@ export default function TextChunk({
             <span
               key={`${delay === 1 ? "pri" : "com"}-${(idx + 1) * (chunkIdx + 1)}`}
               className="inline"
-              style={{ animationDelay: `${delay + (chunkIdx + idx * 0.025)}s` }}
+              style={{
+                animationDelay: `${delay + chunkIdx * 0.5 + idx * 0.025}s`,
+              }}
             >
               {char}
             </span>
