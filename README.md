@@ -1,53 +1,47 @@
 # React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This template provides a minimal setup to get React working in Vite with HMR and oxlint for fast linting.
 
 Currently, two official plugins are available:
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
+## Linting with Oxlint
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+This project uses [Oxlint](https://oxc.rs/docs/guide/usage/linter) for fast, efficient linting. Oxlint is 50-100x faster than ESLint and supports TypeScript, React, and many popular ESLint rules out of the box.
 
-- Configure the top-level `parserOptions` property like this:
+### Configuration
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
+Linting is configured in `.oxlintrc.json`. The configuration includes:
+
+- **Categories**: `correctness` (errors), `suspicious` (warnings), and `pedantic` (warnings)
+- **Plugins**: React, TypeScript, Unicorn, and OXC built-in rules
+- **Environment**: Browser and ES2020 globals
+- **Ignore patterns**: `dist` and `node_modules` directories
+
+### Running the linter
+
+```bash
+# Lint all files
+pnpm lint
+
+# Lint with auto-fixing (where available)
+oxlint --fix
+
+# Lint specific files
+oxlint src/
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### Additional Oxlint features
 
-```js
-// eslint.config.js
-import react from "eslint-plugin-react";
+- **Fast performance**: 50-100x faster than ESLint
+- **Built-in TypeScript support**: No additional configuration needed
+- **React support**: Includes React Hooks and React Refresh rules
+- **Auto-fixing**: Many rules support automatic fixes
+- **VS Code extension**: Install the [Oxc VS Code extension](https://marketplace.visualstudio.com/items?itemName=oxc.oxc-vscode) for real-time linting
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: "18.3" } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs["jsx-runtime"].rules,
-  },
-});
-```
+For more information, see the [Oxlint documentation](https://oxc.rs/docs/guide/usage/linter).
 
 ### References:
 

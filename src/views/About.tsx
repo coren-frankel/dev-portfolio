@@ -15,7 +15,7 @@ const About = () => {
           margin: "auto",
         }}
       >
-        I'm called Coren. Full Stack Software Developer based in Denver,
+        I&apos;m called Coren. Full Stack Software Developer based in Denver,
         Colorado. I acquired dual bachelors degrees in Philosophy & Political
         Science in 2013. For the following 8 years I ascended rank in various
         roles in the hospitality industy, taking pride in my ability to lead
@@ -29,9 +29,9 @@ const About = () => {
         that my education and work ethic would serve me anywhere. Within a
         couple of weeks of rest followed by research, I began to progress
         through{" "}
-        <Link to="https://www.theodinproject.com/">The Odin Project</Link>'s Web
-        Development curriculumn and quickly committed to making a career
-        transition into software engineering and web development.
+        <Link to="https://www.theodinproject.com/">The Odin Project</Link>
+        &apos;s Web Development curriculumn and quickly committed to making a
+        career transition into software engineering and web development.
         <br />
         <br />
         After excelling in two <em>bootcamp</em>-style immersive programs, and
@@ -46,13 +46,13 @@ const About = () => {
         Open Source Software projects.
         <br />
         <br />
-        I read horror novels and primary philosophy texts for fun. I enjoy
-        hiking, pontificating, and cracking wise with my Wife. We are adoptive
-        parents to a whiny but lovable cat named Leapday William. I like all
-        kinds of music and have a humble record collection that I occasionally
-        add to. I pick a guitar or ukelele from time to time. I usually have a
-        single-player game on rotation on my PS5, and it's rarely the newest or
-        hotest thing.
+        I enjoy horror novels and philosophy texts for pleasure. I enjoy hiking
+        and pontificating with my partner, who is currently a first year law
+        student. We are adoptive parents to a lovably attention-starved cat
+        named Leapday William. I like all kinds of music and have a humble
+        record collection that I occasionally add to. I pick a guitar or ukelele
+        from time to time. I usually have a single-player game on rotation on my
+        PS5, and it&apos;s rarely the newest or hottest thing.
         <br />
       </Card>
     </Layout>

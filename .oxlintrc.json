@@ -1,0 +1,30 @@
+{
+  "categories": {
+    "correctness": "error",
+    "suspicious": "warn",
+    "pedantic": "warn"
+  },
+  "plugins": ["react", "typescript", "unicorn", "oxc"],
+  "rules": {
+    "react-hooks/exhaustive-deps": "warn",
+    "react/react-in-jsx-scope": "off",
+    "react/iframe-missing-sandbox": "off",
+    "no-console": "warn",
+    "no-debugger": "error",
+    "max-lines": "off",
+    "max-lines-per-function": "off",
+    "max-nested-callbacks": "off",
+    "max-depth": "off"
+  },
+  "env": {
+    "browser": true,
+    "es2020": true
+  },
+  "settings": {
+    "react": {
+      "version": "19.1",
+      "jsx": "react-jsx"
+    }
+  },
+  "ignorePatterns": ["dist", "node_modules"]
+}
