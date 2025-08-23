@@ -69,7 +69,7 @@ function Main() {
           speed={-0.3}
           style={{ pointerEvents: "none" }}
         >
-          <img src={catcus} width={"55%"} />
+          <img src={catcus} width={sm() ? "55%" : "40%"} />
         </ParallaxLayer>
 
         <ParallaxLayer offset={2} speed={0.8} style={{ opacity: 0.1 }}>
@@ -159,13 +159,21 @@ function Main() {
         <ParallaxLayer offset={3.2} speed={0.4} style={{ opacity: 0.6 }}>
           <img
             src={branch}
-            width={"20%"}
+            width={sm() ? "20%" : "15%"}
             className="block"
             style={{ marginLeft: "5%", marginTop: "5%" }}
           />
-          <div className="block" style={{ marginLeft: "25%" }}>
-            <div className="box sb">Eyo!</div>
-            <img src={deer} width={"30%"} />
+          <div className="block" style={{ marginLeft: sm() ? "25%" : "20%" }}>
+            <div
+              className="box sb"
+              style={{
+                fontSize: sm() ? "16px" : "14px",
+                padding: sm() ? "20px" : "15px",
+              }}
+            >
+              Eyo!
+            </div>
+            <img src={deer} width={sm() ? "30%" : "25%"} />
           </div>
         </ParallaxLayer>
 
@@ -188,19 +196,25 @@ function Main() {
           onClick={() => parallax.current.scrollTo(1)}
           style={{
             display: "flex",
-            gap: "40px",
+            gap: sm() ? "40px" : "20px",
             flexDirection: sm() ? "row" : "column",
             alignItems: "center",
             justifyContent: "space-around",
+            padding: sm() ? "40px" : "20px 10px",
           }}
         >
           <Card
-            style={{ maxWidth: "400px", padding: "10px" }}
+            style={{
+              maxWidth: sm() ? "400px" : "350px",
+              padding: sm() ? "10px" : "5px",
+              width: "100%",
+              backgroundColor: "hsl(270, 100%, 94%)",
+            }}
             hoverable
             cover={
               <Image
-                style={{ height: "100px" }}
-                src="https://go-skill-icons.vercel.app/api/icons?i=md,html,css,js,ts,python,java,graphql&perline=4&theme=auto"
+                style={{ height: sm() ? "100px" : "80px" }}
+                src={`https://go-skill-icons.vercel.app/api/icons?i=md,html,css,js,ts,python,java,graphql&perline=${sm() ? 4 : 3}&theme=auto`}
                 alt="Markdown, HTML, CSS, JavaScript, TypeScript, Python, Java, GraphQL"
               />
             }
@@ -210,14 +224,24 @@ function Main() {
               description="I'm an aspiring polyglot, proficient in these languages and syntaxes, among others"
             />
           </Card>
-          <Image preview={false} src={web} width={sm() ? "20%" : "80%"} />
+          <Image
+            preview={false}
+            src={web}
+            width={sm() ? "20%" : "60%"}
+            style={{ maxWidth: sm() ? "none" : "200px" }}
+          />
           <Card
-            style={{ maxWidth: "400px", padding: "10px" }}
+            style={{
+              maxWidth: sm() ? "400px" : "350px",
+              padding: sm() ? "10px" : "5px",
+              width: "100%",
+              backgroundColor: "hsl(270, 100%, 94%)",
+            }}
             hoverable
             cover={
               <Image
-                style={{ height: "100px" }}
-                src="https://go-skill-icons.vercel.app/api/icons?i=tailwind,bootstrap,materialui,react,reactnative,expo,threejs&perline=4&theme=auto"
+                style={{ height: sm() ? "100px" : "80px" }}
+                src={`https://go-skill-icons.vercel.app/api/icons?i=tailwind,bootstrap,materialui,react,reactnative,expo,threejs&perline=${sm() ? 4 : 3}&theme=auto`}
                 alt="Tailwind CSS, Bootstrap, Material UI, React, React Native, Expo, Three.js"
               />
             }
@@ -235,19 +259,25 @@ function Main() {
           onClick={() => parallax.current.scrollTo(2)}
           style={{
             display: "flex",
-            gap: "40px",
+            gap: sm() ? "40px" : "20px",
             flexDirection: sm() ? "row" : "column",
             alignItems: "center",
             justifyContent: "center",
+            padding: sm() ? "40px" : "20px 10px",
           }}
         >
           <Card
-            style={{ maxWidth: "400px", padding: "10px" }}
+            style={{
+              maxWidth: sm() ? "400px" : "350px",
+              padding: sm() ? "10px" : "5px",
+              width: "100%",
+              backgroundColor: "hsl(270, 100%, 94%)",
+            }}
             hoverable
             cover={
               <Image
-                style={{ height: "100px" }}
-                src="https://go-skill-icons.vercel.app/api/icons?i=nodejs,deno,remix,npm,pnpm,flask,maven,spring,express&perline=5&theme=auto"
+                style={{ height: sm() ? "100px" : "80px" }}
+                src={`https://go-skill-icons.vercel.app/api/icons?i=nodejs,deno,remix,npm,pnpm,flask,maven,spring,express&perline=${sm() ? 5 : 3}&theme=auto`}
                 alt="Node.js, Deno, Remix, npm, pnpm, Flask, Maven, Spring, Express"
               />
             }
@@ -257,14 +287,24 @@ function Main() {
               description="I utilize various backend, full-stack technologies, package managers & runtimes"
             />
           </Card>
-          <Image preview={false} src={full} width={sm() ? "20%" : "80%"} />
+          <Image
+            preview={false}
+            src={full}
+            width={sm() ? "20%" : "60%"}
+            style={{ maxWidth: sm() ? "none" : "200px" }}
+          />
           <Card
-            style={{ maxWidth: "400px", padding: "10px" }}
+            style={{
+              maxWidth: sm() ? "400px" : "350px",
+              padding: sm() ? "10px" : "5px",
+              width: "100%",
+              backgroundColor: "hsl(270, 100%, 94%)",
+            }}
             hoverable
             cover={
               <Image
-                style={{ height: "100px" }}
-                src="https://go-skill-icons.vercel.app/api/icons?i=postgres,mysql,supabase,redis,mongodb,sqlite,prisma,sqlalchemy,mongoose,bigquery&perline=5&theme=auto"
+                style={{ height: sm() ? "100px" : "80px" }}
+                src={`https://go-skill-icons.vercel.app/api/icons?i=postgres,mysql,supabase,redis,mongodb,sqlite,prisma,sqlalchemy,mongoose,bigquery&perline=${sm() ? 5 : 3}&theme=auto`}
                 alt="PostgreSQL, MySQL, Supabase, Redis, MongoDB, SQLite, Prisma, SQLAlchemy, Mongoose, BigQuery"
               />
             }
@@ -282,19 +322,25 @@ function Main() {
           onClick={() => parallax.current.scrollTo(3)}
           style={{
             display: "flex",
-            gap: "40px",
+            gap: sm() ? "40px" : "20px",
             flexDirection: sm() ? "row" : "column",
             alignItems: "center",
             justifyContent: "center",
+            padding: sm() ? "40px" : "20px 10px",
           }}
         >
           <Card
-            style={{ maxWidth: "400px", padding: "10px" }}
+            style={{
+              maxWidth: sm() ? "400px" : "350px",
+              padding: sm() ? "10px" : "5px",
+              width: "100%",
+              backgroundColor: "hsl(270, 100%, 94%)",
+            }}
             hoverable
             cover={
               <Image
-                style={{ height: "100px" }}
-                src="https://go-skill-icons.vercel.app/api/icons?i=docker,ghactions,digitalocean,vercel,render,ngrok,cloudflare,aws,gcp,sentry,snyk&perline=6&theme=auto"
+                style={{ height: sm() ? "100px" : "80px" }}
+                src={`https://go-skill-icons.vercel.app/api/icons?i=docker,ghactions,digitalocean,vercel,render,ngrok,cloudflare,aws,gcp,sentry,snyk&perline=${sm() ? 6 : 4}&theme=auto`}
                 alt="Docker, Github Actions, Vercel, Render, Ngrok, Cloudflare, AWS EC2, Google Cloud Platform, Sentry, Snyk"
               />
             }
@@ -304,14 +350,24 @@ function Main() {
               description="Development tools that streamline my code to production"
             />
           </Card>
-          <Image preview={false} src={sql} width={sm() ? "20%" : "80%"} />
+          <Image
+            preview={false}
+            src={sql}
+            width={sm() ? "20%" : "60%"}
+            style={{ maxWidth: sm() ? "none" : "200px" }}
+          />
           <Card
-            style={{ maxWidth: "400px", padding: "10px" }}
+            style={{
+              maxWidth: sm() ? "400px" : "350px",
+              padding: sm() ? "10px" : "5px",
+              width: "100%",
+              backgroundColor: "hsl(270, 100%, 94%)",
+            }}
             hoverable
             cover={
               <Image
-                style={{ height: "100px" }}
-                src="https://go-skill-icons.vercel.app/api/icons?i=vscode,idea,postman,terminal,xcode,android,androidstudio,apple,linux,ubuntu,eclipse&perline=6&theme=auto"
+                style={{ height: sm() ? "100px" : "80px" }}
+                src={`https://go-skill-icons.vercel.app/api/icons?i=vscode,idea,postman,terminal,xcode,android,androidstudio,apple,linux,ubuntu,eclipse&perline=${sm() ? 6 : 4}&theme=auto`}
                 alt="VS Code, IntelliJ Idea, Postman, Terminal, Xcode, Android, Android Studio, Apple, Linux, Ubuntu, Eclipse"
               />
             }
@@ -334,13 +390,27 @@ function Main() {
             backgroundSize: "100%",
             backgroundPosition: "center",
             backgroundImage: mtn,
+            padding: sm() ? "20px" : "10px",
           }}
           onClick={() => parallax.current.scrollTo(0)}
         >
-          <Canvas style={{ marginBottom: "-200px" }}>
+          <Canvas
+            style={{
+              marginBottom: sm() ? "-200px" : "-100px",
+              height: sm() ? "auto" : "200px",
+            }}
+          >
             <Scene />
           </Canvas>
-          <Card style={{ maxWidth: "500px", alignSelf: "end", right: 20 }}>
+          <Card
+            style={{
+              maxWidth: sm() ? "500px" : "350px",
+              alignSelf: sm() ? "end" : "center",
+              right: sm() ? 20 : 0,
+              width: sm() ? "auto" : "100%",
+              margin: sm() ? "0" : "0 10px",
+            }}
+          >
             <Card.Meta
               title="Open Source Contributor"
               avatar={
@@ -353,20 +423,22 @@ function Main() {
                 <List
                   size="small"
                   header={
-                    <Typography.Paragraph>
+                    <Typography.Paragraph
+                      style={{ fontSize: sm() ? "14px" : "12px" }}
+                    >
                       Find my contributions to various projects on Github,
                       including (but not limited to):
                     </Typography.Paragraph>
                   }
                 >
-                  <List.Item>
+                  <List.Item style={{ fontSize: sm() ? "14px" : "12px" }}>
                     <Link to="https://react-pdf.org/" target="_blank">
                       react-pdf
                     </Link>{" "}
                     - React renderer for creating PDF files on the browser and
                     server
                   </List.Item>
-                  <List.Item>
+                  <List.Item style={{ fontSize: sm() ? "14px" : "12px" }}>
                     <Link
                       to="https://github.com/danomatic/react-pdf-html"
                       target="_blank"
@@ -375,7 +447,7 @@ function Main() {
                     </Link>{" "}
                     - HTML component for react-pdf
                   </List.Item>
-                  <List.Item>
+                  <List.Item style={{ fontSize: sm() ? "14px" : "12px" }}>
                     <Link
                       to="https://flask-cors.readthedocs.io/en/latest/index.html"
                       target="_blank"
@@ -385,7 +457,7 @@ function Main() {
                     - A Flask extension for handling Cross Origin Resource
                     Sharing (CORS)
                   </List.Item>
-                  <List.Item>
+                  <List.Item style={{ fontSize: sm() ? "14px" : "12px" }}>
                     <Link
                       to="https://github.com/marketplace/actions/todo-to-issue"
                       target="_blank"
@@ -395,7 +467,7 @@ function Main() {
                     Github Action to create, update and close issues based on
                     committed TODO comments
                   </List.Item>
-                  <List.Item>
+                  <List.Item style={{ fontSize: sm() ? "14px" : "12px" }}>
                     <Link
                       to="https://github.com/LelouchFR/skill-icons"
                       target="_blank"
@@ -409,10 +481,24 @@ function Main() {
               }
             />
           </Card>
-          <Typography.Title style={{ color: "cyan" }}>
+          <Typography.Title
+            style={{
+              color: "cyan",
+              fontSize: sm() ? "2rem" : "1.5rem",
+              textAlign: "center",
+              margin: sm() ? "16px 0" : "12px 0 8px 0",
+            }}
+          >
             And so much more...
           </Typography.Title>
-          <Typography.Paragraph style={{ color: "orange" }}>
+          <Typography.Paragraph
+            style={{
+              color: "orange",
+              fontSize: sm() ? "16px" : "14px",
+              textAlign: "center",
+              margin: sm() ? "0" : "0 10px",
+            }}
+          >
             This site is under construction and incomplete. Check back soon.
           </Typography.Paragraph>
         </ParallaxLayer>

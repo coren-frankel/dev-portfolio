@@ -21,3 +21,38 @@
   border-top: 15px solid #fff;
   border-bottom: 15px solid transparent;
 }
+
+/* Mobile responsiveness improvements */
+@media (max-width: 576px) {
+  .box {
+    width: 60px;
+    padding: 15px;
+    font-size: 14px;
+  }
+
+  .sb:before {
+    border-left: 12px solid #fff;
+    border-right: 12px solid transparent;
+    border-top: 12px solid #fff;
+    border-bottom: 12px solid transparent;
+  }
+}
+
+/* Ensure text readability on mobile */
+@media (max-width: 768px) {
+  .ant-card-meta-title {
+    font-size: 16px !important;
+  }
+
+  .ant-card-meta-description {
+    font-size: 14px !important;
+  }
+
+  .ant-typography h1 {
+    font-size: 24px !important;
+  }
+
+  .ant-typography p {
+    font-size: 14px !important;
+  }
+}

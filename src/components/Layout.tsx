@@ -127,7 +127,7 @@ export const Layout = ({
     },
   );
   return (
-    <AntdLayout>
+    <AntdLayout style={{ minHeight: "100vh" }}>
       <Header
         style={{
           position: "sticky",
@@ -137,9 +137,25 @@ export const Layout = ({
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
+          padding: Object.entries(screens)
+            .filter((screen) => !!screen[1])
+            .some((screen) => screen[0] === "md")
+            ? "0 50px"
+            : "0 16px",
         }}
       >
-        <Image src={logoBanner} preview={false} style={{ maxHeight: 65 }} />
+        <Image
+          src={logoBanner}
+          preview={false}
+          style={{
+            maxHeight: Object.entries(screens)
+              .filter((screen) => !!screen[1])
+              .some((screen) => screen[0] === "md")
+              ? 65
+              : 50,
+            height: "auto",
+          }}
+        />
         {Object.entries(screens)
           .filter((screen) => !!screen[1])
           .some((screen) => screen[0] === "md") ? (
@@ -147,27 +163,49 @@ export const Layout = ({
             theme="dark"
             mode="horizontal"
             items={items.filter((i) => i.path !== location)}
+            style={{ flex: 1, justifyContent: "flex-end" }}
           />
         ) : (
           <>
-            <Button type="text" onClick={showDrawer}>
-              <MenuOutlined style={{ color: "#fff" }} size={24} />
+            <Button
+              type="text"
+              onClick={showDrawer}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                minWidth: "40px",
+                height: "40px",
+              }}
+            >
+              <MenuOutlined style={{ color: "#fff", fontSize: "18px" }} />
             </Button>
-            <Drawer placement="right" onClose={showDrawer} open={visible}>
+            <Drawer
+              placement="right"
+              onClose={showDrawer}
+              open={visible}
+              width={280}
+              styles={{
+                body: { padding: 0 },
+              }}
+            >
               <Menu
                 theme="dark"
                 mode="inline"
                 items={items.filter((i) => i.path !== location)}
+                style={{ border: "none" }}
+                onClick={() => setVisible(false)}
               />
             </Drawer>
           </>
         )}
       </Header>
-      <Content>
+      <Content style={{ flex: 1 }}>
         <animated.div
           id="gradient"
           style={{
             ...style,
+            minHeight: "100%",
             backgroundImage: allStops.to(
               (...args) => `linear-gradient(${angle}deg, ${args.join(", ")})`,
             ),
