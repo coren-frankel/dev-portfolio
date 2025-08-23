@@ -41,7 +41,7 @@ importers:
     devDependencies:
       '@commitlint/cli':
         specifier: ^19.8.1
-        version: 19.8.1(@types/node@24.3.0)(typescript@5.7.2)
+        version: 19.8.1(@types/node@24.3.0)(typescript@5.9.2)
       '@commitlint/config-conventional':
         specifier: ^19.8.1
         version: 19.8.1
@@ -71,10 +71,10 @@ importers:
         version: 3.6.2
       tsc-files:
         specifier: ^1.1.4
-        version: 1.1.4(typescript@5.7.2)
+        version: 1.1.4(typescript@5.9.2)
       typescript:
-        specifier: 5.7.2
-        version: 5.7.2
+        specifier: 5.9.2
+        version: 5.9.2
       vite:
         specifier: ^7.1.3
         version: 7.1.3(@types/node@24.3.0)(jiti@2.5.1)(yaml@2.8.1)
@@ -1637,8 +1637,8 @@ packages:
     peerDependencies:
       typescript: '>=3'
 
-  typescript@5.7.2:
-    resolution: {integrity: sha512-i5t66RHxDvVN40HfDd1PsEThGNnlMCMT3jMUuoh9/0TaqWevNontacunWyN02LA9/fIbEWlcHZcgTKb9QoaLfg==}
+  typescript@5.9.2:
+    resolution: {integrity: sha512-CWBzXQrc/qOkhidw1OzBTQuYRbfyxDXJMVJ1XNwUHGROVmuaeiEm3OslpZ1RV96d7SKKjZKrSJu3+t/xlw3R9A==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -1817,11 +1817,11 @@ snapshots:
 
   '@babel/runtime@7.28.3': {}
 
-  '@commitlint/cli@19.8.1(@types/node@24.3.0)(typescript@5.7.2)':
+  '@commitlint/cli@19.8.1(@types/node@24.3.0)(typescript@5.9.2)':
     dependencies:
       '@commitlint/format': 19.8.1
       '@commitlint/lint': 19.8.1
-      '@commitlint/load': 19.8.1(@types/node@24.3.0)(typescript@5.7.2)
+      '@commitlint/load': 19.8.1(@types/node@24.3.0)(typescript@5.9.2)
       '@commitlint/read': 19.8.1
       '@commitlint/types': 19.8.1
       tinyexec: 1.0.1
@@ -1868,15 +1868,15 @@ snapshots:
       '@commitlint/rules': 19.8.1
       '@commitlint/types': 19.8.1
 
-  '@commitlint/load@19.8.1(@types/node@24.3.0)(typescript@5.7.2)':
+  '@commitlint/load@19.8.1(@types/node@24.3.0)(typescript@5.9.2)':
     dependencies:
       '@commitlint/config-validator': 19.8.1
       '@commitlint/execute-rule': 19.8.1
       '@commitlint/resolve-extends': 19.8.1
       '@commitlint/types': 19.8.1
       chalk: 5.6.0
-      cosmiconfig: 9.0.0(typescript@5.7.2)
-      cosmiconfig-typescript-loader: 6.1.0(@types/node@24.3.0)(cosmiconfig@9.0.0(typescript@5.7.2))(typescript@5.7.2)
+      cosmiconfig: 9.0.0(typescript@5.9.2)
+      cosmiconfig-typescript-loader: 6.1.0(@types/node@24.3.0)(cosmiconfig@9.0.0(typescript@5.9.2))(typescript@5.9.2)
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       lodash.uniq: 4.5.0
@@ -2514,21 +2514,21 @@ snapshots:
     dependencies:
       toggle-selection: 1.0.6
 
-  cosmiconfig-typescript-loader@6.1.0(@types/node@24.3.0)(cosmiconfig@9.0.0(typescript@5.7.2))(typescript@5.7.2):
+  cosmiconfig-typescript-loader@6.1.0(@types/node@24.3.0)(cosmiconfig@9.0.0(typescript@5.9.2))(typescript@5.9.2):
     dependencies:
       '@types/node': 24.3.0
-      cosmiconfig: 9.0.0(typescript@5.7.2)
+      cosmiconfig: 9.0.0(typescript@5.9.2)
       jiti: 2.5.1
-      typescript: 5.7.2
+      typescript: 5.9.2
 
-  cosmiconfig@9.0.0(typescript@5.7.2):
+  cosmiconfig@9.0.0(typescript@5.9.2):
     dependencies:
       env-paths: 2.2.1
       import-fresh: 3.3.1
       js-yaml: 4.1.0
       parse-json: 5.2.0
     optionalDependencies:
-      typescript: 5.7.2
+      typescript: 5.9.2
 
   csstype@3.1.3: {}
 
@@ -3295,11 +3295,11 @@ snapshots:
 
   toggle-selection@1.0.6: {}
 
-  tsc-files@1.1.4(typescript@5.7.2):
+  tsc-files@1.1.4(typescript@5.9.2):
     dependencies:
-      typescript: 5.7.2
+      typescript: 5.9.2
 
-  typescript@5.7.2: {}
+  typescript@5.9.2: {}
 
   undici-types@7.10.0: {}
 
