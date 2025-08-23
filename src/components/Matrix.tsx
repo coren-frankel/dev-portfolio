@@ -1,7 +1,5 @@
 const Matrix = () => {
   return (
-    // Ignore iframe complaint about sandbox to allow embedded youtube video
-    // oxlint-disable
     <iframe
       width="560"
       height="315"

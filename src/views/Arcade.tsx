@@ -37,7 +37,6 @@ const Arcade = () => {
             title="NinjaSweeper"
             src="https://coren-frankel.github.io/NinjaSweeper/"
             height="650"
-            sandbox="allow-scripts allow-forms"
           />
         }
       >
@@ -58,7 +57,7 @@ const Arcade = () => {
                     <SoundTwoTone twoToneColor="#FF550a" />
                   )
                 }
-                onClick={toggleMute}
+                // onClick={toggleMute}
               />
             </Popover>
           }

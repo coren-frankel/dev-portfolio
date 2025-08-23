@@ -8,6 +8,7 @@
   "rules": {
     "react-hooks/exhaustive-deps": "warn",
     "react/react-in-jsx-scope": "off",
+    "react/iframe-missing-sandbox": "off",
     "no-console": "warn",
     "no-debugger": "error",
     "max-lines": "off",
