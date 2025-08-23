@@ -49,7 +49,7 @@ const Landing = () => {
   // Home page navigation
   const acceptInputCommand = useCallback(
     (command: string) => {
-      if (/about|contact|home|arcade/i.test(command)) {
+      if (/about|home|arcade/i.test(command)) {
         setChunkState([...chunkState, `% ${command}`]);
         setChunkState([
           ...chunkState,

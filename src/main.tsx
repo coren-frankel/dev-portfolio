@@ -7,7 +7,6 @@ import Main from "./views/Main.tsx";
 import Matrix from "./components/Matrix.tsx";
 import About from "./views/About.tsx";
 import Arcade from "./views/Arcade.tsx";
-import Contact from "./views/Contact.tsx";
 
 createRoot(document.querySelector("#root")!).render(
   <StrictMode>
@@ -17,7 +16,6 @@ createRoot(document.querySelector("#root")!).render(
         <Route path="home" element={<Main />} />
         <Route path="about" element={<About />} />
         <Route path="arcade" element={<Arcade />} />
-        <Route path="contact" element={<Contact />} />
         <Route path="the-matrix-has-you" element={<Matrix />} />
       </Routes>
     </BrowserRouter>

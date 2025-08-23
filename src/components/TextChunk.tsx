@@ -5,8 +5,7 @@ const textChunks = [
   "Here's how to navigate:",
   "Type 'home' to go to the home page",
   "Type 'about' to learn more about me",
-  "Type 'contact' to reach out",
-  "Press the Enter key to execute a command",
+  "Hint: Press the Enter key to execute a command",
 ];
 
 interface TextChunkProps {
@@ -24,13 +23,16 @@ export default function TextChunk({
         <span
           key={`chunk-${delay === 1 ? "pri" : "com"}-${chunkIdx}`}
           className="chunk"
+          style={{
+            animationDelay: `${delay + chunkIdx * 2}s`,
+          }}
         >
           {chunk.split("").map((char, idx) => (
             <span
               key={`${delay === 1 ? "pri" : "com"}-${(idx + 1) * (chunkIdx + 1)}`}
               className="inline"
               style={{
-                animationDelay: `${delay + chunkIdx * 0.5 + idx * 0.025}s`,
+                animationDelay: `${delay + chunkIdx * 1 + idx * 0.025}s`,
               }}
             >
               {char}

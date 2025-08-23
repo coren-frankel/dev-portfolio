@@ -16,7 +16,7 @@ import {
   MenuOutlined,
 } from "@ant-design/icons";
 
-import logoBanner from "../assets/facebook_cover_photo_1.png";
+import logoBanner from "../assets/header-logo.png";
 import { useEffect, useState, type CSSProperties } from "react";
 
 const STOPS = 20;
@@ -43,15 +43,6 @@ const items = [
   },
   {
     key: 3,
-    path: "/contact",
-    label: (
-      <NavLink className="nav-link" to="/contact">
-        Contact
-      </NavLink>
-    ),
-  },
-  {
-    key: 4,
     path: "/arcade",
     label: (
       <NavLink className="nav-link" to="/arcade">
@@ -60,7 +51,7 @@ const items = [
     ),
   },
   {
-    key: 5,
+    key: 4,
     path: "/",
     label: (
       <NavLink className="nav-link" to="/">
@@ -69,7 +60,7 @@ const items = [
     ),
   },
   {
-    key: 6,
+    key: 5,
     label: (
       <a className="nav-link" href="https://github.com/coren-frankel">
         <GithubOutlined /> Github
@@ -77,7 +68,7 @@ const items = [
     ),
   },
   {
-    key: 7,
+    key: 6,
     label: (
       <a className="nav-link" href="https://linkedin.com/in/coren-frankel">
         <LinkedinOutlined /> LinkedIn
@@ -85,7 +76,7 @@ const items = [
     ),
   },
   {
-    key: 8,
+    key: 7,
     label: (
       <a className="nav-link" href="mailto:dev@corenfrankel.com">
         <MailOutlined /> Email
