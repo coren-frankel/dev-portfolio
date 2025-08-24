@@ -83,9 +83,11 @@ const Landing = () => {
 
   // Home page navigation
   const acceptInputCommand = (command: string) => {
-    if (/menu/i.test(command)) {
+    if (/menu|help/i.test(command)) {
       // Menu command
-      setChunkState([...chunkState, ...menuItems]);
+      setChunkState([...menuItems]);
+      setShowGreeting(false);
+      setWakeUp(false);
     } else if (/about|home|arcade/i.test(command)) {
       // Literal matches for pages
       setChunkState([
@@ -108,9 +110,6 @@ const Landing = () => {
       setChunkState([]);
       setWakeUp(true);
       setShowGreeting(false);
-    } else if (/help/i.test(command)) {
-      setWakeUp(false);
-      setShowGreeting(true);
     } else if (/secret|hidden|shh/i.test(command)) {
       setChunkState(secretMenu);
       setShowGreeting(false);
