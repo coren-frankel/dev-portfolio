@@ -12,6 +12,7 @@ const repos = [
   "culinary-unit-abbreviation",
   "VolatilitySurf",
   "meal_picker",
+  "dev-portfolio",
 ];
 
 const Landing = () => {
