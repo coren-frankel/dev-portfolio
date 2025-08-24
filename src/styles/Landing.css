@@ -21,6 +21,7 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
+  width: min(95%, 500px);
   transform: translate(-50%, -50%);
   background-color: #000;
 }
@@ -37,6 +38,7 @@ pre {
 .chunk {
   display: block;
   padding-left: 1em;
+  line-height: 1.2em;
 }
 
 .inline {

@@ -26,6 +26,9 @@ importers:
       easing-coordinates:
         specifier: ^2.0.2
         version: 2.0.2
+      emoji-regex:
+        specifier: ^10.4.0
+        version: 10.4.0
       react:
         specifier: ^19.1.1
         version: 19.1.1
