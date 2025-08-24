@@ -7,6 +7,7 @@ import Main from "./views/Main.tsx";
 import Matrix from "./components/Matrix.tsx";
 import About from "./views/About.tsx";
 import Arcade from "./views/Arcade.tsx";
+import NotFound from "./views/NotFound.tsx";
 
 createRoot(document.querySelector("#root")!).render(
   <StrictMode>
@@ -17,6 +18,8 @@ createRoot(document.querySelector("#root")!).render(
         <Route path="about" element={<About />} />
         <Route path="arcade" element={<Arcade />} />
         <Route path="the-matrix-has-you" element={<Matrix />} />
+        {/* Catch-all route for unmatched paths */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,
