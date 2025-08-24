@@ -2,7 +2,7 @@ import "../styles/Landing.css";
 import { Input, Typography } from "antd";
 import { PercentageOutlined } from "@ant-design/icons";
 import emojiRegex from "emoji-regex";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { useNavigate } from "react-router";
 import TextChunk from "./TextChunk";
 
@@ -20,6 +20,7 @@ const Landing = () => {
   const [chunkState, setChunkState] = useState<string[]>([]);
   const [showGreeting, setShowGreeting] = useState(true);
   const [wakeUp, setWakeUp] = useState(false);
+  const [animationKey, setAnimationKey] = useState(0); // Key to force animation restart
   const navigate = useNavigate();
   const inputRef = useRef<any>(null);
 
@@ -29,6 +30,21 @@ const Landing = () => {
       inputRef.current.focus();
     }
   };
+
+  // Helper functions for state management with animation restart
+  const appendToState = useCallback((newChunks: string[]) => {
+    setChunkState((prev) => [...prev, ...newChunks]);
+  }, []);
+
+  const rewriteState = useCallback((newChunks: string[]) => {
+    setChunkState(newChunks);
+    setAnimationKey((prev) => prev + 1); // Force animation restart
+  }, []);
+
+  const clearState = useCallback(() => {
+    setChunkState([]);
+    setAnimationKey((prev) => prev + 1); // Force animation restart
+  }, []);
 
   // Add visible class for fade-in animation
   useEffect(() => {
@@ -42,7 +58,7 @@ const Landing = () => {
       // Check if the Control or Command key is pressed and the 'X' key is pressed
       if ((event.ctrlKey || event.metaKey) && event.key === "x") {
         event.preventDefault(); // Prevent the default cut operation
-        setChunkState([...chunkState, "Follow the white rabbit."]);
+        appendToState(["Follow the white rabbit."]);
         const knockKnock = setTimeout(
           () => navigate("/the-matrix-has-you"),
           5000,
@@ -51,11 +67,10 @@ const Landing = () => {
       }
       if (event.key === "Escape") {
         if (wakeUp) {
-          setChunkState([...chunkState, `Knock knock, ${name}.`]);
+          appendToState([`Knock knock, ${name}.`]);
           setTimeout(() => navigate("/the-matrix-has-you"), 3000);
         } else {
-          setChunkState([
-            ...chunkState,
+          appendToState([
             `Session terminated. Redirecting to home page... Goodbye ${name === "Neo" ? "" : name}.`,
           ]);
           setTimeout(() => navigate("/home"), 3000);
@@ -70,63 +85,68 @@ const Landing = () => {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [chunkState, navigate, name, wakeUp]);
+  }, [appendToState, navigate, name, wakeUp]);
 
   // Upon 30 seconds of inactivity, load Morpheus' greeting
   useEffect(() => {
     const awake = setTimeout(() => {
       setWakeUp(true);
-      setChunkState([`Wake up, ${name}...`, "The Matrix has you..."]);
+      rewriteState([`Wake up, ${name}...`, "The Matrix has you..."]);
     }, 30000);
     return () => clearTimeout(awake);
-  }, [command, name]);
+  }, [command, name, rewriteState]);
 
   // Home page navigation
   const acceptInputCommand = (command: string) => {
     if (/menu|help/i.test(command)) {
-      // Menu command
-      setChunkState([...menuItems]);
+      // Menu command - rewrite display
       setShowGreeting(false);
       setWakeUp(false);
+      rewriteState(menuItems);
     } else if (/about|home|arcade/i.test(command)) {
-      // Literal matches for pages
-      setChunkState([
-        ...chunkState,
+      // Literal matches for pages - append
+      appendToState([
         `Redirecting to ${command[0].toUpperCase()}${command.slice(1).toLowerCase()} page...`,
       ]);
       setTimeout(() => navigate(`/${command.toLowerCase()}`), 3000);
     } else if (/game/i.test(command)) {
-      // Game command
-      setChunkState([...chunkState, "Redirecting to Arcade page..."]);
+      // Game command - append
+      appendToState(["Redirecting to Arcade page..."]);
       setTimeout(() => navigate(`/arcade`), 3000);
     } else if (/more/i.test(command)) {
-      // More command
-      setChunkState([...chunkState, "Redirecting to About page..."]);
+      // More command - append
+      appendToState(["Redirecting to About page..."]);
       setTimeout(() => navigate(`/about`), 3000);
     } else if (/white rabbit/i.test(command)) {
-      setChunkState([...chunkState, "Follow the White Rabbit..."]);
+      // White rabbit - append
+      appendToState(["Follow the White Rabbit..."]);
       setTimeout(() => navigate("/the-matrix-has-you"), 3000);
     } else if (/clear/i.test(command)) {
-      setChunkState([]);
+      // Clear command - clear state
+      clearState();
       setWakeUp(true);
       setShowGreeting(false);
     } else if (/secret|hidden|shh/i.test(command)) {
-      setChunkState(secretMenu);
+      // Secret menu - rewrite display
+      rewriteState(secretMenu);
       setShowGreeting(false);
       setWakeUp(false);
     } else if (command.match(regex) || /^[^ace-zACE-Z]+$/i.test(command)) {
-      setChunkState([...asciiResponse]);
+      // ASCII response - rewrite display
+      rewriteState(asciiResponse);
       setShowGreeting(false);
       setWakeUp(false);
     } else if (/hello:(.+)/i.test(command)) {
+      // Personalization - append
       const match = command.match(/hello:(.+)/i);
       const userName = match
         ? `${match[1].trim()[0].toUpperCase()}${match[1].trim().slice(1).toLowerCase()}`
         : "Neo";
       setName(userName);
-      setChunkState([`Hello, ${userName}. Thanks for coming!`]);
+      appendToState([`Hello, ${userName}. Thanks for coming!`]);
     } else if (/repo/i.test(command)) {
-      setChunkState([...chunkState, "Here's a random GitHub repository:"]);
+      // Repository command - append
+      appendToState(["Here's a random GitHub repository:"]);
       setTimeout(() => {
         window.open(
           `https://github.com/coren-frankel/${repos[Math.floor(Math.random() * repos.length)]}`,
@@ -134,14 +154,16 @@ const Landing = () => {
         );
       }, 3000);
     } else if (/reset/i.test(command)) {
+      // Reset command - clear and reset
       setWakeUp(false);
       setShowGreeting(true);
-      setChunkState([]);
+      clearState();
     } else if ("".match(command.trim())) {
       // do nothing
       return;
     } else {
-      setChunkState([...chunkState, `Command: "${command}" not recognized`]);
+      // Unrecognized command - append
+      appendToState([`Command: "${command}" not recognized`]);
     }
     setCommand("");
   };
@@ -167,31 +189,35 @@ const Landing = () => {
   const asciiResponse = ["(\\_/)", "( •_•)", "/> 🌺"];
 
   return (
-    <div className="landing-page" onClick={handlePageClick}>
-      <div className="terminal lavender">
-        <Typography.Paragraph code className="lavender" id="code">
-          {showGreeting && !wakeUp && <TextChunk />}
-          <TextChunk chunks={chunkState} delay={0.01} />
-          <Input
-            ref={inputRef}
-            prefix={<PercentageOutlined className="lavender" />}
-            style={{
-              border: "none",
-              backgroundColor: "#110",
-              boxShadow: "none",
-            }}
-            autoFocus
-            autoComplete="none"
-            aria-autocomplete="none"
-            id="command-line"
-            className="lavender"
-            contentEditable
-            value={command}
-            onChange={(event) => setCommand(event.target.value)}
-            onPressEnter={() => acceptInputCommand(command)}
-          />
-        </Typography.Paragraph>
-      </div>
+    <div className="landing-page terminal" onClick={handlePageClick}>
+      <Typography.Paragraph code className="lavender" id="code">
+        {showGreeting && !wakeUp && (
+          <TextChunk resetKey={`greeting-${animationKey}`} />
+        )}
+        <TextChunk
+          chunks={chunkState}
+          delay={0}
+          resetKey={`chunks-${animationKey}`}
+        />
+        <Input
+          ref={inputRef}
+          prefix={<PercentageOutlined className="lavender" />}
+          style={{
+            border: "none",
+            backgroundColor: "#110",
+            boxShadow: "none",
+          }}
+          autoFocus
+          autoComplete="none"
+          aria-autocomplete="none"
+          id="command-line"
+          className="lavender"
+          contentEditable
+          value={command}
+          onChange={(event) => setCommand(event.target.value)}
+          onPressEnter={() => acceptInputCommand(command)}
+        />
+      </Typography.Paragraph>
     </div>
   );
 };

@@ -23,7 +23,6 @@ body {
   left: 50%;
   width: min(95%, 500px);
   transform: translate(-50%, -50%);
-  background-color: #000;
 }
 
 pre {

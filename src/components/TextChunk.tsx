@@ -8,17 +8,19 @@ const defaultGreeting = [
 interface TextChunkProps {
   chunks?: string[];
   delay?: number;
+  resetKey?: string | number; // Add a reset key to force re-animation
 }
 
 export default function TextChunk({
   chunks = defaultGreeting,
-  delay = 1,
+  delay = 0.5,
+  resetKey = "default", // Default to a stable key for consistent behavior
 }: TextChunkProps) {
   return (
     <>
       {chunks.flatMap((chunk, chunkIdx) => (
         <span
-          key={`chunk-${delay === 1 ? "pri" : "com"}-${chunkIdx}`}
+          key={`chunk-${resetKey}-${chunkIdx}`}
           className="chunk"
           style={{
             animationDelay: `${delay + chunkIdx * 1.5}s`,
@@ -26,10 +28,10 @@ export default function TextChunk({
         >
           {chunk.split("").map((char, idx) => (
             <span
-              key={`${delay === 1 ? "pri" : "com"}-${(idx + 1) * (chunkIdx + 1)}`}
+              key={`char-${resetKey}-${chunkIdx}-${idx}`}
               className="inline"
               style={{
-                animationDelay: `${delay + chunkIdx * 0.5 + idx * 0.025}s`,
+                animationDelay: `${delay + chunkIdx + idx * 0.025}s`,
               }}
             >
               {char}
