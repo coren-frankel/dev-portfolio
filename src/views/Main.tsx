@@ -241,14 +241,14 @@ function Main() {
             cover={
               <Image
                 style={{ height: sm() ? "100px" : "80px" }}
-                src={`https://go-skill-icons.vercel.app/api/icons?i=tailwind,bootstrap,materialui,react,reactnative,expo,threejs&perline=${sm() ? 4 : 3}&theme=auto`}
-                alt="Tailwind CSS, Bootstrap, Material UI, React, React Native, Expo, Three.js"
+                src={`https://go-skill-icons.vercel.app/api/icons?i=tailwind,bootstrap,materialui,antdesign,react,reactnative,threejs,jquery&perline=${sm() ? 4 : 3}&theme=auto`}
+                alt="Tailwind CSS, Bootstrap, Material UI, Ant Design React, React Native, Three.js, jQuery"
               />
             }
           >
             <Card.Meta
               title="Frontend libraries & frameworks"
-              description="I've used various progressive style libraries and frameworks, most notably in the React ecosystem"
+              description="I use various progressive style libraries and frameworks"
             />
           </Card>
         </ParallaxLayer>
@@ -277,8 +277,8 @@ function Main() {
             cover={
               <Image
                 style={{ height: sm() ? "100px" : "80px" }}
-                src={`https://go-skill-icons.vercel.app/api/icons?i=nodejs,deno,remix,npm,pnpm,flask,maven,spring,express&perline=${sm() ? 5 : 3}&theme=auto`}
-                alt="Node.js, Deno, Remix, npm, pnpm, Flask, Maven, Spring, Express"
+                src={`https://go-skill-icons.vercel.app/api/icons?i=nodejs,deno,remix,npm,pnpm,flask,maven,spring,express,expo&perline=${sm() ? 5 : 3}&theme=auto`}
+                alt="Node.js, Deno, Remix, npm, pnpm, Flask, Maven, Spring, Express, Expo"
               />
             }
           >
