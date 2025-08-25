@@ -11,23 +11,81 @@ body {
   background-color: black;
   opacity: 0;
   transition: opacity 2s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .landing-page.visible {
   opacity: 1;
 }
 
-.terminal {
+/* SEO Content - Hidden from visual display but accessible to screen readers and search engines */
+.seo-content {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: min(95%, 500px);
-  transform: translate(-50%, -50%);
+  top: -9999px;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.seo-content.visible {
+  position: static;
+  top: auto;
+  left: auto;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(147, 112, 219, 0.3);
+}
+
+.visible-text {
+  color: lavender;
+}
+
+.help-button {
+  transition: all 0.3s ease;
+}
+
+.help-button:hover {
+  background: rgba(147, 112, 219, 0.2) !important;
+  transform: scale(1.1);
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.terminal {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.terminal-content {
+  width: 100%;
 }
 
 pre {
   overflow-x: auto;
-  width: 380px;
+  width: 100%;
+  max-width: 500px;
   margin: 0 auto;
   padding: 10px;
   border-radius: 10px;
@@ -71,4 +129,55 @@ code {
   border: none;
   background-color: #111;
   font-size: 12px;
+  width: 100%;
+  padding-right: 10px;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .landing-page {
+    padding: 10px;
+  }
+
+  .terminal {
+    max-width: 100%;
+  }
+
+  pre {
+    max-width: 100%;
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  #command-line {
+    font-size: 14px;
+  }
+
+  code {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .landing-page {
+    padding: 5px;
+  }
+
+  pre {
+    padding: 5px;
+    font-size: 12px;
+  }
+
+  #command-line {
+    font-size: 12px;
+  }
+
+  code {
+    padding: 8px;
+  }
+
+  .chunk {
+    padding-left: 0.5em;
+    line-height: 1.1em;
+  }
 }

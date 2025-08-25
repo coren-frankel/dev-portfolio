@@ -1,6 +1,6 @@
 import "../styles/Landing.css";
-import { Input, Typography } from "antd";
-import { PercentageOutlined } from "@ant-design/icons";
+import { Input, Typography, Button } from "antd";
+import { PercentageOutlined, QuestionCircleOutlined } from "@ant-design/icons";
 import emojiRegex from "emoji-regex";
 import { useEffect, useState, useRef, useCallback } from "react";
 import { useNavigate } from "react-router";
@@ -18,9 +18,11 @@ const repos = [
 const Landing = () => {
   const [command, setCommand] = useState("");
   const [name, setName] = useState("Neo");
-  const [chunkState, setChunkState] = useState<string[]>([]);
+  const [displayedChunks, setDisplayedChunks] = useState<string[]>([]);
+  const [animatingChunks, setAnimatingChunks] = useState<string[]>([]);
   const [showGreeting, setShowGreeting] = useState(true);
   const [wakeUp, setWakeUp] = useState(false);
+  const [showHelp, setShowHelp] = useState(false);
   const [animationKey, setAnimationKey] = useState(0); // Key to force animation restart
   const navigate = useNavigate();
   const inputRef = useRef<any>(null);
@@ -33,17 +35,27 @@ const Landing = () => {
   };
 
   // Helper functions for state management with animation restart
-  const appendToState = useCallback((newChunks: string[]) => {
-    setChunkState((prev) => [...prev, ...newChunks]);
-  }, []);
+  const appendToState = useCallback(
+    (newChunks: string[]) => {
+      // Move currently animating chunks to displayed chunks
+      setDisplayedChunks((prev) => [...prev, ...animatingChunks]);
+      // Set new chunks as the ones to animate
+      setAnimatingChunks(newChunks);
+      setAnimationKey((prev) => prev + 1);
+    },
+    [animatingChunks],
+  );
 
   const rewriteState = useCallback((newChunks: string[]) => {
-    setChunkState(newChunks);
+    // Clear everything and start fresh with new chunks
+    setDisplayedChunks([]);
+    setAnimatingChunks(newChunks);
     setAnimationKey((prev) => prev + 1); // Force animation restart
   }, []);
 
   const clearState = useCallback(() => {
-    setChunkState([]);
+    setDisplayedChunks([]);
+    setAnimatingChunks([]);
     setAnimationKey((prev) => prev + 1); // Force animation restart
   }, []);
 
@@ -191,15 +203,89 @@ const Landing = () => {
 
   return (
     <div className="landing-page terminal" onClick={handlePageClick}>
-      <Typography.Paragraph code className="lavender" id="code">
+      {/* Help Button */}
+      <Button
+        type="text"
+        icon={<QuestionCircleOutlined />}
+        className="help-button"
+        onClick={(e) => {
+          e.stopPropagation();
+          setShowHelp(!showHelp);
+        }}
+        style={{
+          position: "absolute",
+          top: "20px",
+          right: "20px",
+          color: "lavender",
+          border: "none",
+          zIndex: 1000,
+        }}
+        aria-label="Toggle help information"
+      />
+
+      {/* SEO Content - Hidden but accessible to search engines, or visible when help is toggled */}
+      <div className={showHelp ? "seo-content visible" : "seo-content"}>
+        <Typography.Title
+          level={1}
+          type="success"
+          className={showHelp ? "" : "visually-hidden"}
+        >
+          Welcome to My Developer Portfolio
+        </Typography.Title>
+        <Typography.Title
+          level={2}
+          type="warning"
+          className={showHelp ? "" : "visually-hidden"}
+        >
+          Interactive Command Line Interface
+        </Typography.Title>
+        <Typography.Paragraph
+          className={showHelp ? "visible-text" : "visually-hidden"}
+        >
+          Explore my portfolio through this interactive CLI simulation. Type
+          commands to navigate and learn more about my projects, skills, and
+          experience.
+        </Typography.Paragraph>
+        <Typography.Title
+          level={2}
+          type="danger"
+          className={showHelp ? "" : "visually-hidden"}
+        >
+          Quick Navigation
+        </Typography.Title>
+        <Typography.Paragraph
+          className={showHelp ? "visible-text" : "visually-hidden"}
+        >
+          Type commands like &apos;home&apos;, &apos;about&apos;, or
+          &apos;game&apos; to explore different sections of my portfolio. Use
+          the Return or Enter key to submit commands.
+        </Typography.Paragraph>
+      </div>
+
+      {/* Terminal Interface */}
+      <Typography.Paragraph
+        code
+        className="lavender terminal-content"
+        id="code"
+      >
         {showGreeting && !wakeUp && (
           <TextChunk resetKey={`greeting-${animationKey}`} />
         )}
-        <TextChunk
-          chunks={chunkState}
-          delay={0}
-          resetKey={`chunks-${animationKey}`}
-        />
+        {/* Render already displayed chunks instantly */}
+        {displayedChunks.map((chunk, idx) => (
+          <span key={`displayed-${idx}`} className="chunk">
+            {chunk}
+          </span>
+        ))}
+        {/* Render currently animating chunks with animation */}
+        {animatingChunks.length > 0 && (
+          <TextChunk
+            chunks={animatingChunks}
+            delay={0}
+            resetKey={`animating-${animationKey}`}
+            startImmediately={true}
+          />
+        )}
         <Input
           ref={inputRef}
           prefix={<PercentageOutlined className="lavender" />}
