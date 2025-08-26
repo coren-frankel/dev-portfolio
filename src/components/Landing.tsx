@@ -260,6 +260,82 @@ const Landing = () => {
           &apos;game&apos; to explore different sections of my portfolio. Use
           the Return or Enter key to submit commands.
         </Typography.Paragraph>
+        <Typography.Title level={2} className="visually-hidden">
+          Professional Software Developer Profile
+        </Typography.Title>
+        <Typography.Paragraph className="visually-hidden">
+          Welcome to the portfolio of Coren Frankel, a passionate and dedicated
+          software developer based in Denver, Colorado. With expertise spanning
+          full-stack web development, modern JavaScript frameworks, and database
+          management, I specialize in creating robust, scalable, and
+          user-friendly applications that solve real-world problems.
+        </Typography.Paragraph>
+        <Typography.Title level={3} className="visually-hidden">
+          Technical Expertise and Specializations
+        </Typography.Title>
+        <Typography.Paragraph className="visually-hidden">
+          My technical toolkit includes proficiency in React, TypeScript,
+          JavaScript, Python, and modern web technologies. I have extensive
+          experience with database systems including MySQL, PostgreSQL, and
+          Redis, enabling me to build comprehensive data-driven applications. My
+          frontend development skills encompass responsive design, user
+          experience optimization, and modern CSS frameworks, while my backend
+          expertise includes API development, server management, and cloud
+          deployment strategies.
+        </Typography.Paragraph>
+        <Typography.Title level={3} className="visually-hidden">
+          Development Philosophy and Approach
+        </Typography.Title>
+        <Typography.Paragraph className="visually-hidden">
+          I believe in writing clean, maintainable code that prioritizes both
+          performance and accessibility. My development approach emphasizes
+          test-driven development, continuous integration, and agile
+          methodologies. I&apos;m passionate about staying current with emerging
+          technologies and best practices, regularly contributing to open-source
+          projects and engaging with the developer community through various
+          platforms and local meetups.
+        </Typography.Paragraph>
+        <Typography.Title level={3} className="visually-hidden">
+          Collaboration and Professional Growth
+        </Typography.Title>
+        <Typography.Paragraph className="visually-hidden">
+          As a collaborative team player, I excel in both independent
+          development and team environments. I have experience working with
+          cross-functional teams, participating in code reviews, and mentoring
+          junior developers. My communication skills allow me to effectively
+          translate technical concepts for non-technical stakeholders, ensuring
+          project alignment and successful delivery. I&apos;m always eager to
+          learn from others and share knowledge within the development
+          community.
+        </Typography.Paragraph>
+        <Typography.Title level={3} className="visually-hidden">
+          Innovation and Future-Forward Thinking
+        </Typography.Title>
+        <Typography.Paragraph className="visually-hidden">
+          I&apos;m particularly interested in emerging technologies such as
+          progressive web applications and modern development tools that enhance
+          productivity and user experience, but I also recognize the importance
+          of established technologies and best practices. This portfolio website
+          itself demonstrates my commitment to innovation, featuring an
+          interactive command-line interface that provides a unique and engaging
+          way for visitors to explore my work and background. I continuously
+          explore new frameworks, tools, and methodologies to stay at the
+          forefront of software development trends.
+        </Typography.Paragraph>
+        <Typography.Title level={3} className="visually-hidden">
+          Connect and Collaborate
+        </Typography.Title>
+        <Typography.Paragraph className="visually-hidden">
+          I&apos;m always open to discussing new opportunities, collaborative
+          projects, or simply connecting with fellow developers and technology
+          enthusiasts. Whether you&apos;re looking for a skilled developer to
+          join your team, interested in collaborating on an open-source project,
+          or want to discuss the latest developments in web technology, I
+          welcome the opportunity to connect. Feel free to explore this
+          interactive portfolio, check out my GitHub repositories, and reach out
+          through any of the available channels. Let&apos;s build something
+          amazing together!
+        </Typography.Paragraph>
       </div>
 
       {/* Terminal Interface */}
