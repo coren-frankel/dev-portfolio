@@ -189,6 +189,7 @@ Create a `.env` file in the root directory:
 ```env
 # Required for contact form
 RESEND_API_KEY=your_resend_api_key
+TURNSTILE_SITE_KEY=your_turnstile_site_key
 TURNSTILE_SECRET_KEY=your_turnstile_secret_key
 
 # Optional for development
