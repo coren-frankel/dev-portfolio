@@ -1,3 +1,4 @@
+import "@ant-design/v5-patch-for-react-19";
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "react-router";
 import type { LinksFunction } from "react-router";
 
@@ -67,13 +68,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
         <Meta />
         <Links />
-
-        {/* Cloudflare Turnstile */}
-        <script
-          src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-          async
-          defer
-        ></script>
       </head>
       <body>
         {children}

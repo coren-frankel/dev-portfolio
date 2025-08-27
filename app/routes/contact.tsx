@@ -1,5 +1,5 @@
 import type { ActionFunctionArgs, MetaFunction } from "react-router";
-import { useActionData, useLoaderData } from "react-router";
+import { useActionData, useLoaderData, useNavigate } from "react-router";
 import { useEffect } from "react";
 import { message } from "antd";
 import { Resend } from "resend";
@@ -141,6 +141,7 @@ export async function action({ request }: ActionFunctionArgs) {
     const emailData = await resend.emails.send({
       from: "Contact Form <contact@corenfrankel.com>",
       to: ["dev@corenfrankel.com"],
+      replyTo: email,
       subject: `Portfolio Contact: ${subject}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -170,7 +171,7 @@ export async function action({ request }: ActionFunctionArgs) {
     if (emailData.error) {
       return Response.json(
         {
-          error: `Failed to send email: ${JSON.stringify(emailData.error)}`,
+          error: "Failed to send email",
           success: false,
         },
         { status: 500 },
@@ -196,15 +197,17 @@ export default function Contact() {
   const actionData = useActionData<ActionData>();
   const { turnstileSiteKey } = useLoaderData<LoaderData>();
   const [messageApi, contextHolder] = message.useMessage();
+  const navigate = useNavigate();
 
   // Show messages based on action results
   useEffect(() => {
     if (actionData?.success && "message" in actionData) {
       messageApi.success(actionData.message);
+      setTimeout(() => navigate("/home"), 3000);
     } else if (actionData && "error" in actionData) {
       messageApi.error(actionData.error);
     }
-  }, [actionData, messageApi]);
+  }, [actionData, messageApi, navigate]);
 
   return (
     <>
@@ -212,8 +215,7 @@ export default function Contact() {
       <Layout>
         <ContactForm
           siteKey={turnstileSiteKey}
-          successMessage={actionData?.success ? actionData.message : undefined}
-          message={messageApi}
+          resetForm={actionData?.success || false}
         />
       </Layout>
     </>

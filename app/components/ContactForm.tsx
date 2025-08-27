@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Input, Button, message, Card, Typography } from "antd";
+import { Input, Button, Card, Typography, message } from "antd";
 import { MailOutlined, UserOutlined, MessageOutlined } from "@ant-design/icons";
 import { Turnstile } from "@marsidev/react-turnstile";
 import { Form as RemixForm } from "react-router";
@@ -9,23 +9,21 @@ const { Title, Paragraph } = Typography;
 
 export interface ContactFormProps {
   siteKey: string;
-  successMessage?: string;
+  resetForm: boolean;
 }
 
-export const ContactForm = ({ siteKey, successMessage }: ContactFormProps) => {
+export const ContactForm = ({ siteKey, resetForm }: ContactFormProps) => {
   const [turnstileToken, setTurnstileToken] = useState<string>("");
   const turnstileRef = useRef<any>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const [messageApi] = message.useMessage();
 
-  // Show feedback and reset form after success
   useEffect(() => {
-    if (successMessage && formRef.current) {
-      formRef.current.reset();
+    if (resetForm) {
+      formRef.current?.reset();
       setTurnstileToken("");
-      message.success(successMessage);
     }
-  }, [successMessage]);
+  }, [resetForm]);
 
   return (
     <Card
