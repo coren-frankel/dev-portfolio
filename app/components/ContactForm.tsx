@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Input, Button, message, Card, Typography } from "antd";
 import { MailOutlined, UserOutlined, MessageOutlined } from "@ant-design/icons";
 import { Turnstile } from "@marsidev/react-turnstile";
@@ -7,9 +7,25 @@ import { Form as RemixForm } from "react-router";
 const { TextArea } = Input;
 const { Title, Paragraph } = Typography;
 
-export const ContactForm = () => {
+export interface ContactFormProps {
+  siteKey: string;
+  successMessage?: string;
+}
+
+export const ContactForm = ({ siteKey, successMessage }: ContactFormProps) => {
   const [turnstileToken, setTurnstileToken] = useState<string>("");
   const turnstileRef = useRef<any>(null);
+  const formRef = useRef<HTMLFormElement>(null);
+  const [messageApi] = message.useMessage();
+
+  // Show feedback and reset form after success
+  useEffect(() => {
+    if (successMessage && formRef.current) {
+      formRef.current.reset();
+      setTurnstileToken("");
+      message.success(successMessage);
+    }
+  }, [successMessage]);
 
   return (
     <Card
@@ -31,7 +47,7 @@ export const ContactForm = () => {
         from you!
       </Paragraph>
 
-      <RemixForm method="post" style={{ width: "100%" }}>
+      <RemixForm method="post" style={{ width: "100%" }} ref={formRef}>
         <div style={{ marginBottom: 16 }}>
           <label
             htmlFor="name"
@@ -125,11 +141,11 @@ export const ContactForm = () => {
           >
             <Turnstile
               ref={turnstileRef}
-              siteKey="1x00000000000000000000AA"
+              siteKey={siteKey}
               onSuccess={(token) => setTurnstileToken(token)}
               onError={() => {
                 setTurnstileToken("");
-                message.error(
+                messageApi.error(
                   "Security verification failed. Please try again.",
                 );
               }}
@@ -137,7 +153,6 @@ export const ContactForm = () => {
                 setTurnstileToken("");
               }}
               options={{
-                // theme: 'light',
                 size: "flexible",
               }}
             />

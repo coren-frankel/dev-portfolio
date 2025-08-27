@@ -1,16 +1,22 @@
 import type { ActionFunctionArgs, MetaFunction } from "react-router";
-import { useActionData } from "react-router";
+import { useActionData, useLoaderData } from "react-router";
 import { useEffect } from "react";
 import { message } from "antd";
 import { Resend } from "resend";
 import { ContactForm } from "../components/ContactForm";
 import { Layout } from "../components/Layout";
+import type { TurnstileServerValidationResponse } from "@marsidev/react-turnstile";
 
 // Define action data types
 type ActionData =
   | { success: true; message: string }
   | { success: false; error: string }
   | undefined;
+
+// Define loader data types
+type LoaderData = {
+  turnstileSiteKey: string;
+};
 
 export const meta: MetaFunction = () => {
   return [
@@ -21,6 +27,14 @@ export const meta: MetaFunction = () => {
     },
   ];
 };
+
+// Server-side loader to provide environment variables to client
+export function loader() {
+  return Response.json({
+    turnstileSiteKey:
+      process.env.TURNSTILE_SITE_KEY || "1x00000000000000000000AA",
+  });
+}
 
 // Server-side form action
 export async function action({ request }: ActionFunctionArgs) {
@@ -45,22 +59,20 @@ export async function action({ request }: ActionFunctionArgs) {
 
   // Verify Turnstile token
   try {
-    const turnstileResponse = await fetch(
-      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: new URLSearchParams({
-          secret: process.env.TURNSTILE_SECRET_KEY!,
-          response: turnstileToken,
-        }),
-      },
-    );
+    const verifyEndpoint =
+      "https://challenges.cloudflare.com/turnstile/v0/siteverify";
 
-    const turnstileData = await turnstileResponse.json();
-    if (!turnstileData.success) {
+    const res = await fetch(verifyEndpoint, {
+      method: "POST",
+      body: `secret=${encodeURIComponent(process.env.TURNSTILE_SECRET_KEY!)}&response=${encodeURIComponent(turnstileToken)}`,
+      headers: {
+        "content-type": "application/x-www-form-urlencoded",
+      },
+    });
+
+    const data = (await res.json()) as TurnstileServerValidationResponse;
+
+    if (!data.success) {
       return Response.json(
         {
           error: "Invalid security verification",
@@ -158,7 +170,7 @@ export async function action({ request }: ActionFunctionArgs) {
     if (emailData.error) {
       return Response.json(
         {
-          error: "Failed to send email",
+          error: `Failed to send email: ${JSON.stringify(emailData.error)}`,
           success: false,
         },
         { status: 500 },
@@ -182,19 +194,28 @@ export async function action({ request }: ActionFunctionArgs) {
 
 export default function Contact() {
   const actionData = useActionData<ActionData>();
+  const { turnstileSiteKey } = useLoaderData<LoaderData>();
+  const [messageApi, contextHolder] = message.useMessage();
 
   // Show messages based on action results
   useEffect(() => {
     if (actionData?.success && "message" in actionData) {
-      message.success(actionData.message);
+      messageApi.success(actionData.message);
     } else if (actionData && "error" in actionData) {
-      message.error(actionData.error);
+      messageApi.error(actionData.error);
     }
-  }, [actionData]);
+  }, [actionData, messageApi]);
 
   return (
-    <Layout>
-      <ContactForm />
-    </Layout>
+    <>
+      {contextHolder}
+      <Layout>
+        <ContactForm
+          siteKey={turnstileSiteKey}
+          successMessage={actionData?.success ? actionData.message : undefined}
+          message={messageApi}
+        />
+      </Layout>
+    </>
   );
 }
