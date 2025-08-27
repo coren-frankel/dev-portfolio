@@ -84,7 +84,7 @@ const Landing = () => {
           setTimeout(() => navigate("/the-matrix-has-you"), 3000);
         } else {
           appendToState([
-            `Session terminated. Redirecting to home page... Goodbye ${name === "Neo" ? "" : name}.`,
+            `Session terminated. Redirecting to home page... Goodbye${name === "Neo" ? "" : " " + name}.`,
           ]);
           setTimeout(() => navigate("/home"), 3000);
         }
