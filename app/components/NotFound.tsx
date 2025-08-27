@@ -1,5 +1,5 @@
 import { Button, Card, Result } from "antd";
-import { Layout } from "../components/Layout";
+import { Layout } from "./Layout";
 import { useNavigate } from "react-router";
 
 const NotFound = () => {

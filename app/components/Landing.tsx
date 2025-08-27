@@ -46,18 +46,18 @@ const Landing = () => {
     [animatingChunks],
   );
 
-  const rewriteState = useCallback((newChunks: string[]) => {
+  const rewriteState = (newChunks: string[]) => {
     // Clear everything and start fresh with new chunks
     setDisplayedChunks([]);
     setAnimatingChunks(newChunks);
     setAnimationKey((prev) => prev + 1); // Force animation restart
-  }, []);
+  };
 
-  const clearState = useCallback(() => {
+  const clearState = () => {
     setDisplayedChunks([]);
     setAnimatingChunks([]);
     setAnimationKey((prev) => prev + 1); // Force animation restart
-  }, []);
+  };
 
   // Add visible class for fade-in animation
   useEffect(() => {
@@ -107,7 +107,7 @@ const Landing = () => {
       rewriteState([`Wake up, ${name}...`, "The Matrix has you..."]);
     }, 30000);
     return () => clearTimeout(awake);
-  }, [command, name, rewriteState]);
+  }, [command, name]);
 
   // Home page navigation
   const acceptInputCommand = (command: string) => {

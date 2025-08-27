@@ -12,7 +12,6 @@ import { NavLink, useLocation } from "react-router";
 import {
   GithubOutlined,
   LinkedinOutlined,
-  MailOutlined,
   MenuOutlined,
 } from "@ant-design/icons";
 
@@ -52,6 +51,15 @@ const items = [
   },
   {
     key: 4,
+    path: "/contact",
+    label: (
+      <NavLink className="nav-link" to="/contact">
+        Contact
+      </NavLink>
+    ),
+  },
+  {
+    key: 5,
     path: "/",
     label: (
       <NavLink className="nav-link" to="/">
@@ -60,7 +68,7 @@ const items = [
     ),
   },
   {
-    key: 5,
+    key: 6,
     label: (
       <a className="nav-link" href="https://github.com/coren-frankel">
         <GithubOutlined /> Github
@@ -68,18 +76,10 @@ const items = [
     ),
   },
   {
-    key: 6,
+    key: 7,
     label: (
       <a className="nav-link" href="https://linkedin.com/in/coren-frankel">
         <LinkedinOutlined /> LinkedIn
-      </a>
-    ),
-  },
-  {
-    key: 7,
-    label: (
-      <a className="nav-link" href="mailto:dev@corenfrankel.com">
-        <MailOutlined /> Email
       </a>
     ),
   },

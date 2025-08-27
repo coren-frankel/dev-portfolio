@@ -1,19 +1,135 @@
 # Dev Portfolio
 
-This repository contains the source code for my personal portfolio website. It showcases my projects, skills, and experience, built with modern web development tools and technologies.
+This repository contains the source code for my personal portfolio website. Built with React Router v7 (previously Remix), it showcases my projects, skills, and experience using modern full-stack web development tools and technologies.
 
 ## Technology Stack
 
-- **React**: A JavaScript library for building user interfaces.
-- **TypeScript**: A strongly typed programming language that builds on JavaScript.
-- **Vite**: A fast build tool and development server for modern web projects.
-- **Ant Design**: A React UI library for building elegant and responsive interfaces.
-- **React Router**: For client-side routing in the single-page application.
-- **Oxlint**: A fast and efficient linter for TypeScript and React.
-- **Prettier**: A code formatter to ensure consistent code style.
-- **Commit-lint**: Enforces consistent commit message conventions.
-- **Lint-staged**: Runs linters on staged files before committing.
-- **Husky**: Manages Git hooks to automate linting and commit message validation.
+### Core Framework
+
+- **React Router v7**: Full-stack web framework with server-side rendering, file-based routing, and server actions
+- **React 19**: Latest version of the React library for building user interfaces
+- **TypeScript**: Strongly typed programming language that builds on JavaScript
+- **Vite**: Fast build tool and development server for modern web projects
+
+### UI & Styling
+
+- **Ant Design**: React UI library for building elegant and responsive interfaces
+- **React Spring**: Animation library for React applications
+- **React Three Fiber**: React renderer for Three.js 3D graphics
+
+### Development Tools
+
+- **Oxlint**: Fast and efficient linter for TypeScript and React (50-100x faster than ESLint)
+- **Prettier**: Code formatter to ensure consistent code style
+- **tsc-files**: TypeScript compiler for individual files in lint-staged
+- **Commitlint**: Enforces consistent commit message conventions
+- **Lint-staged**: Runs linters on staged files before committing
+- **Husky**: Manages Git hooks to automate linting and commit message validation
+
+### Backend & Services
+
+- **Resend**: Email delivery service for contact form functionality
+- **Cloudflare Turnstile**: Bot protection for forms using React Turnstile component
+
+## Architecture Overview
+
+This portfolio uses React Router v7's full-stack architecture with the following structure:
+
+### File-Based Routing
+
+Routes are automatically generated from files in the `app/routes/` directory:
+
+- `app/routes/_index.tsx` → `/` (Home page)
+- `app/routes/about.tsx` → `/about`
+- `app/routes/contact.tsx` → `/contact`
+- `app/routes/arcade.tsx` → `/arcade`
+
+### Server Actions
+
+Forms use React Router v7's server actions for secure server-side processing:
+
+- Contact form with Turnstile verification
+- Email sending via Resend API
+- Server-side validation and error handling
+
+### Component Architecture
+
+```text
+app/
+├── components/          # Reusable React components
+│   ├── ContactForm.tsx  # Contact form with Turnstile integration
+│   ├── Layout.tsx       # Main layout wrapper
+│   ├── Landing.tsx      # Landing page component
+│   └── ...
+├── routes/              # File-based routes
+│   ├── _index.tsx       # Home page route
+│   ├── contact.tsx      # Contact page with server action
+│   └── ...
+├── styles/              # CSS stylesheets
+├── assets/              # Static assets (images, icons)
+└── views/               # Page view components
+```
+
+## Key Features
+
+### Contact Form with Bot Protection
+
+- **React Turnstile Integration**: Uses `@marsidev/react-turnstile` for seamless bot protection
+- **Server-Side Validation**: Form processing happens on the server with comprehensive validation
+- **Email Delivery**: Powered by Resend API for reliable email sending
+- **Progressive Enhancement**: Works without JavaScript enabled
+
+### Performance Optimizations
+
+- **Server-Side Rendering**: Fast initial page loads with SSR
+- **Code Splitting**: Automatic route-based code splitting
+- **Modern Build Tools**: Vite for fast development and optimized production builds
+
+### Developer Experience
+
+- **Type Safety**: Full TypeScript coverage across the application
+- **Fast Linting**: Oxlint provides near-instant feedback
+- **Git Hooks**: Automated code quality checks before commits
+- **Hot Reload**: Instant updates during development
+
+## Development Setup
+
+### Prerequisites
+
+- Node.js 20+
+- pnpm (recommended) or npm
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/coren-frankel/dev-portfolio.git
+cd dev-portfolio
+
+# Install dependencies
+pnpm install
+
+# Start development server
+pnpm dev
+```
+
+### Available Scripts
+
+```bash
+# Development
+pnpm dev                 # Start development server
+pnpm build              # Build for production
+pnpm start              # Start production server
+
+# Code Quality
+pnpm lint               # Run Oxlint
+pnpm typecheck          # Type checking with TypeScript
+pnpm format             # Format code with Prettier
+
+# Deployment
+pnpm build              # Build optimized production bundle
+pnpm start              # Serve production build
+```
 
 ## Linting with Oxlint
 
@@ -21,7 +137,7 @@ This project uses [Oxlint](https://oxc.rs/docs/guide/usage/linter) for fast, eff
 
 ### Oxlint Configuration
 
-Linting is configured in `.oxlintrc.json`. The configuration includes:
+Linting is configured in `.oxlintrc.json` with:
 
 - **Categories**: `correctness` (errors), `suspicious` (warnings), and `pedantic` (warnings)
 - **Plugins**: React, TypeScript, Unicorn, and OXC built-in rules
@@ -41,77 +157,91 @@ oxlint --fix
 oxlint src/
 ```
 
-### Additional Oxlint features
+## Git Hooks & Code Quality
 
-- **Fast performance**: 50-100x faster than ESLint
-- **Built-in TypeScript support**: No additional configuration needed
-- **React support**: Includes React Hooks and React Refresh rules
-- **Auto-fixing**: Many rules support automatic fixes
-- **VS Code extension**: Install the [Oxc VS Code extension](https://marketplace.visualstudio.com/items?itemName=oxc.oxc-vscode) for real-time linting
+### Pre-commit Hooks
 
-For more information, see the [Oxlint documentation](https://oxc.rs/docs/guide/usage/linter).
+Husky and lint-staged ensure code quality before commits:
 
-## Commit-lint
-
-This project uses [commitlint](https://commitlint.js.org/) to enforce consistent commit message conventions. The configuration is defined in `commitlint.config.js` and ensures that all commit messages follow the [Conventional Commits](https://www.conventionalcommits.org/) standard.
-
-### Commit-lint Configuration
-
-Commit-lint is automatically triggered during the commit process via Husky. If a commit message does not meet the required format, the commit will be rejected.
-
-## Lint-staged
-
-[Lint-staged](https://github.com/okonet/lint-staged) is used to run linters on staged files before committing. This ensures that only properly formatted and linted code is committed to the repository.
+1. **Prettier**: Formats staged files
+2. **Oxlint**: Lints TypeScript/JavaScript files
+3. **tsc-files**: Type checks individual staged files
+4. **Commitlint**: Validates commit message format
 
 ### Lint-staged Configuration
 
-The `lint-staged` configuration is defined in `package.json` and includes:
+The `lint-staged` configuration uses `tsc-files` for efficient TypeScript checking of only the staged files, avoiding issues with module resolution when checking individual files.
 
-- Running Oxlint on staged TypeScript and JavaScript files.
-- Formatting staged files with Prettier.
+### Commit-msg Validation
 
-### Running Lint-staged
-
-Lint-staged is automatically triggered during the commit process via Husky.
-
-## Husky
-
-[Husky](https://typicode.github.io/husky/) is used to manage Git hooks in this project. It is configured to run pre-commit and commit-msg hooks to ensure code quality and commit message consistency.
-
-### Husky Configuration
-
-Husky hooks are defined in the `.husky` directory and include:
-
-- **pre-commit**: Runs `lint-staged` to lint and format staged files.
-- **commit-msg**: Runs `commitlint` to validate commit messages.
-
-### Setting up Husky
-
-Husky is automatically set up when dependencies are installed. If you need to manually set it up, run:
+All commit messages must follow [Conventional Commits](https://www.conventionalcommits.org/) format:
 
 ```bash
-pnpm husky install
+feat: add new contact form validation
+fix: resolve mobile navigation issue
+docs: update README with deployment instructions
 ```
 
-## Configuring Prettier
+## Environment Variables
 
-[Prettier](https://prettier.io/) is used in this project to ensure consistent code formatting. The configuration is defined in `.prettierrc` and includes rules for formatting code, such as line width, tab width, and single/double quotes.
+Create a `.env` file in the root directory:
 
-### Running Prettier
+```env
+# Required for contact form
+RESEND_API_KEY=your_resend_api_key
+TURNSTILE_SECRET_KEY=your_turnstile_secret_key
 
-You can run Prettier manually or as part of the lint-staged process:
+# Optional for development
+NODE_ENV=development
+```
+
+## Deployment
+
+This application can be deployed to any Node.js hosting platform:
+
+### Build for Production
 
 ```bash
-# Format all files
-pnpm prettier --write .
-
-# Check for formatting issues without making changes
-pnpm prettier --check .
+pnpm build
 ```
 
-## References
+### Deploy to Vercel/Netlify
 
-- [CodeSandbox Example](https://codesandbox.io/p/sandbox/b07dmz?file=%2Fsrc%2FApp.tsx)
+The built application in the `build/` directory can be deployed to any static hosting service or Node.js environment.
+
+### Server Requirements
+
+- Node.js 20+
+- Environment variables configured
+- Access to external services (Resend, Cloudflare Turnstile)
+
+## Migration from Remix v2
+
+This project has been migrated from Remix v2 to React Router v7. Key changes include:
+
+### Package Updates
+
+- `@remix-run/*` packages → `@react-router/*` and `react-router`
+- Updated import paths and API usage
+- New `routes.ts` configuration file
+
+### Route Configuration
+
+- Added `app/routes.ts` with `flatRoutes()` for file-based routing
+- Updated `vite.config.ts` to use `reactRouter()` plugin
+- Created `react-router.config.ts` for framework configuration
+
+### Component Updates
+
+- `RemixBrowser` → `HydratedRouter`
+- `RemixServer` → `ServerRouter`
+- Updated import paths for routing hooks and components
+
+## References & Inspiration
+
+- [React Router v7 Documentation](https://reactrouter.com)
 - [React Spring Documentation](https://www.react-spring.dev/docs)
-- [React Three Fiber Events and Interaction](https://r3f.docs.pmnd.rs/tutorials/events-and-interaction)
-- [React Three Fiber with React Spring](https://r3f.docs.pmnd.rs/tutorials/using-with-react-spring)
+- [React Three Fiber Documentation](https://r3f.docs.pmnd.rs)
+- [Ant Design Documentation](https://ant.design)
+- [Oxlint Documentation](https://oxc.rs/docs/guide/usage/linter)
+- [Cloudflare Turnstile Documentation](https://developers.cloudflare.com/turnstile)
