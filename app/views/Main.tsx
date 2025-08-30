@@ -1,13 +1,17 @@
 import "../styles/Main.css";
 import { Layout } from "../components/Layout";
-import { useRef } from "react";
+import { useRef, lazy, Suspense, useState, useEffect } from "react";
 import {
   Parallax,
   ParallaxLayer,
   type IParallax,
 } from "@react-spring/parallax";
-import { Canvas } from "@react-three/fiber";
-import Scene from "../components/Scene";
+
+// Lazy load Three.js components to avoid SSR issues with LoadingManager
+const Canvas = lazy(() =>
+  import("@react-three/fiber").then((module) => ({ default: module.Canvas })),
+);
+const Scene = lazy(() => import("../components/Scene"));
 
 import web from "../assets/responsive-design.svg";
 import full from "../assets/client-server.svg";
@@ -35,6 +39,12 @@ const { useBreakpoint } = Grid;
 
 function Main() {
   const parallax = useRef<IParallax>(null!);
+  const [isClient, setIsClient] = useState(false);
+
+  // Ensure Three.js components only render on client to avoid SSR issues
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
   const screens = useBreakpoint();
   const sm = () =>
     Object.entries(screens)
@@ -394,14 +404,38 @@ function Main() {
           }}
           onClick={() => parallax.current.scrollTo(0)}
         >
-          <Canvas
-            style={{
-              marginBottom: sm() ? "-200px" : "-100px",
-              height: sm() ? "auto" : "200px",
-            }}
-          >
-            <Scene />
-          </Canvas>
+          {isClient ? (
+            <Suspense
+              fallback={
+                <div
+                  style={{
+                    height: "200px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  Loading 3D scene...
+                </div>
+              }
+            >
+              <Canvas
+                style={{
+                  marginBottom: sm() ? "-200px" : "-100px",
+                  height: sm() ? "auto" : "200px",
+                }}
+              >
+                <Scene />
+              </Canvas>
+            </Suspense>
+          ) : (
+            <div
+              style={{
+                height: sm() ? "200px" : "200px",
+                marginBottom: sm() ? "-200px" : "-100px",
+              }}
+            />
+          )}
           <Card
             style={{
               maxWidth: sm() ? "500px" : "350px",

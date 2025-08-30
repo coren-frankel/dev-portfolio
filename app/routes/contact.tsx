@@ -1,8 +1,8 @@
 import type { ActionFunctionArgs, MetaFunction } from "react-router";
 import { useActionData, useLoaderData, useNavigate } from "react-router";
-import { useEffect } from "react";
-import { message } from "antd";
-import { Resend } from "resend";
+import { useEffect, useState } from "react";
+
+import { message, Spin } from "antd";
 import { ContactForm } from "../components/ContactForm";
 import { Layout } from "../components/Layout";
 import type { TurnstileServerValidationResponse } from "@marsidev/react-turnstile";
@@ -136,6 +136,8 @@ export async function action({ request }: ActionFunctionArgs) {
 
   // Send email via Resend
   try {
+    // Import Resend only when needed to avoid global scope issues
+    const { Resend } = await import("resend");
     const resend = new Resend(process.env.RESEND_API_KEY);
 
     const emailData = await resend.emails.send({
@@ -162,7 +164,7 @@ export async function action({ request }: ActionFunctionArgs) {
           
           <div style="margin-top: 30px; padding: 15px; background: #e8f4f8; border-radius: 5px; font-size: 12px; color: #666;">
             <p>This email was sent from your portfolio contact form.</p>
-            <p>Timestamp: ${new Date().toISOString()}</p>
+            <p>Timestamp: ${Date.now()}</p>
           </div>
         </div>
       `,
@@ -198,6 +200,12 @@ export default function Contact() {
   const { turnstileSiteKey } = useLoaderData<LoaderData>();
   const [messageApi, contextHolder] = message.useMessage();
   const navigate = useNavigate();
+  const [isClient, setIsClient] = useState(false);
+
+  // Ensure component only renders on client to avoid Turnstile SSR issues
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   // Show messages based on action results
   useEffect(() => {
@@ -213,10 +221,17 @@ export default function Contact() {
     <>
       {contextHolder}
       <Layout>
-        <ContactForm
-          siteKey={turnstileSiteKey}
-          resetForm={actionData?.success || false}
-        />
+        {isClient ? (
+          <ContactForm
+            siteKey={turnstileSiteKey}
+            resetForm={actionData?.success || false}
+          />
+        ) : (
+          <div style={{ textAlign: "center", padding: "50px" }}>
+            <Spin size="large" />
+            <p style={{ marginTop: "20px" }}>Loading contact form...</p>
+          </div>
+        )}
       </Layout>
     </>
   );

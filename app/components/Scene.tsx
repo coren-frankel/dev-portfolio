@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useFrame } from "@react-three/fiber";
 import { Mesh } from "three";
 
@@ -14,9 +14,18 @@ function getRandomColor() {
 
 const Scene = () => {
   const myMesh = useRef<Mesh>(null!);
-  const [color, setColor] = useState<string>(getRandomColor());
+  const [color, setColor] = useState<string>("#000000"); // Start with a default color
+  const [isClient, setIsClient] = useState(false);
+
+  // Set random color after component mounts to avoid SSR issues
+  useEffect(() => {
+    setIsClient(true);
+    setColor(getRandomColor());
+  }, []);
 
   useFrame(({ clock }) => {
+    if (!isClient) return; // Skip frame updates during SSR
+
     myMesh.current.rotation.x = clock.getElapsedTime();
     myMesh.current.rotation.y = clock.getElapsedTime();
     myMesh.current.rotation.z = clock.getElapsedTime() / 2;

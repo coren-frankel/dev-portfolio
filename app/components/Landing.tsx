@@ -391,7 +391,7 @@ const Landing = () => {
             boxShadow: "none",
           }}
           autoFocus
-          autoComplete="none"
+          autoComplete="off"
           aria-autocomplete="none"
           id="command-line"
           className="lavender"

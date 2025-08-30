@@ -95,6 +95,7 @@ export const Layout = ({
   style?: CSSProperties;
 }) => {
   const [visible, setVisible] = useState(false);
+  const [currentYear, setCurrentYear] = useState(2025); // Default year to avoid SSR issues
   const screens = useBreakpoint();
   const showDrawer = () => {
     setVisible(!visible);
@@ -104,6 +105,8 @@ export const Layout = ({
   useEffect(() => {
     // console.log("location changed", location);
     // setVisible(false);
+    // Set current year after component mounts to avoid SSR issues
+    setCurrentYear(new Date().getFullYear());
   }, [location]);
 
   const { colorFrom, colorMid, colorTo } = useSpring({
@@ -215,7 +218,7 @@ export const Layout = ({
         </animated.div>
       </Content>
       <Footer style={{ textAlign: "center", zIndex: 2 }}>
-        Coren &quot;Kern&quot; Frankel ©{new Date().getFullYear()}
+        Coren &quot;Kern&quot; Frankel ©{currentYear}
       </Footer>
     </AntdLayout>
   );
