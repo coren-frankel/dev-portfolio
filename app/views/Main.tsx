@@ -247,7 +247,7 @@ function Main() {
             }
           >
             <Card.Meta
-              title="Frontend libraries & frameworks"
+              title="Frontend Libraries & Frameworks"
               description="I use various progressive style libraries and frameworks"
             />
           </Card>
