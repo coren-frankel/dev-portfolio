@@ -22,6 +22,7 @@ export default async function handleRequest(
         // errors encountered during initial shell rendering since they'll
         // reject and get logged in handleDocumentRequest.
         if (shellRendered) {
+          // oxlint-disable-next-line no-console
           console.error(error);
         }
       },
