@@ -6,6 +6,7 @@ import { message, Spin } from "antd";
 import { ContactForm } from "../components/ContactForm";
 import { Layout } from "../components/Layout";
 import type { TurnstileServerValidationResponse } from "@marsidev/react-turnstile";
+import useMobile from "~/hooks/useMobile";
 
 // Define action data types
 type ActionData =
@@ -206,18 +207,11 @@ export default function Contact() {
   const [messageApi, contextHolder] = message.useMessage();
   const navigate = useNavigate();
   const [isClient, setIsClient] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const isMobile = useMobile();
 
   // Ensure component only renders on client to avoid Turnstile SSR issues
   useEffect(() => {
     setIsClient(true);
-    // Detect mobile for potential UX adjustments
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768 || "ontouchstart" in window);
-    };
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   // Show messages based on action results
