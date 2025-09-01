@@ -1,0 +1,29 @@
+{
+  "projects": [
+    {
+      "title": "react-pdf",
+      "description": "React renderer for creating PDF files on the browser and server",
+      "link": "https://react-pdf.org/"
+    },
+    {
+      "title": "react-pdf-html",
+      "description": "HTML component for react-pdf",
+      "link": "https://github.com/danomatic/react-pdf-html"
+    },
+    {
+      "title": "Flask-CORS",
+      "description": "A Flask extension for handling Cross Origin Resource Sharing (CORS)",
+      "link": "https://flask-cors.readthedocs.io/en/latest/index.html"
+    },
+    {
+      "title": "TODO-to-Issue",
+      "description": "Github Action to create, update and close issues based on committed TODO comments",
+      "link": "https://github.com/marketplace/actions/todo-to-issue"
+    },
+    {
+      "title": "Skill Icons",
+      "description": "technology skills icon API (provides icons throughout this page)",
+      "link": "https://github.com/LelouchFR/skill-icons"
+    }
+  ]
+}
