@@ -154,7 +154,7 @@ const Landing = () => {
     // Clear any pending navigation timeouts when a new command is entered
     if (!wakeUp) clearAllTimeouts();
 
-    if (!isNamed) {
+    if (!isNamed && !wakeUp) {
       const userName =
         command.trim().length > 1
           ? `${command.trim()[0].toUpperCase()}${command.trim().slice(1).toLowerCase()}`
