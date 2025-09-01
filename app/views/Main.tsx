@@ -1,17 +1,11 @@
 import "../styles/Main.css";
 import { Layout } from "../components/Layout";
-import { useRef, lazy, Suspense, useState, useEffect } from "react";
+import { useRef } from "react";
 import {
   Parallax,
   ParallaxLayer,
   type IParallax,
 } from "@react-spring/parallax";
-
-// Lazy load Three.js components to avoid SSR issues with LoadingManager
-const Canvas = lazy(() =>
-  import("@react-three/fiber").then((module) => ({ default: module.Canvas })),
-);
-const Scene = lazy(() => import("../components/Scene"));
 
 import web from "../assets/responsive-design.svg";
 import full from "../assets/client-server.svg";
@@ -39,12 +33,7 @@ const { useBreakpoint } = Grid;
 
 function Main() {
   const parallax = useRef<IParallax>(null!);
-  const [isClient, setIsClient] = useState(false);
 
-  // Ensure Three.js components only render on client to avoid SSR issues
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
   const screens = useBreakpoint();
   const sm = () =>
     Object.entries(screens)
@@ -397,45 +386,12 @@ function Main() {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            backgroundSize: "100%",
             backgroundPosition: "center",
             backgroundImage: mtn,
             padding: sm() ? "20px" : "10px",
           }}
           onClick={() => parallax.current.scrollTo(0)}
         >
-          {isClient ? (
-            <Suspense
-              fallback={
-                <div
-                  style={{
-                    height: "200px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  Loading 3D scene...
-                </div>
-              }
-            >
-              <Canvas
-                style={{
-                  marginBottom: sm() ? "-200px" : "-100px",
-                  height: sm() ? "auto" : "200px",
-                }}
-              >
-                <Scene />
-              </Canvas>
-            </Suspense>
-          ) : (
-            <div
-              style={{
-                height: sm() ? "200px" : "200px",
-                marginBottom: sm() ? "-200px" : "-100px",
-              }}
-            />
-          )}
           <Card
             style={{
               maxWidth: sm() ? "500px" : "350px",
@@ -460,7 +416,8 @@ function Main() {
                     <Typography.Paragraph
                       style={{ fontSize: sm() ? "14px" : "12px" }}
                     >
-                      Find my contributions to various projects on Github,
+                      Nothing is too small to contribute! I&apos;ve had PRs
+                      merged into various community projects on Github,
                       including (but not limited to):
                     </Typography.Paragraph>
                   }
@@ -523,7 +480,7 @@ function Main() {
               margin: sm() ? "16px 0" : "12px 0 8px 0",
             }}
           >
-            And so much more...
+            And other stuff too...
           </Typography.Title>
           <Typography.Paragraph
             style={{
@@ -533,7 +490,9 @@ function Main() {
               margin: sm() ? "0" : "0 10px",
             }}
           >
-            This site is under construction and incomplete. Check back soon.
+            But I don&apos;t have a lot I can show you right now. Be sure to
+            explore my links, find the secrets of the Console! Check back again
+            soon.
           </Typography.Paragraph>
         </ParallaxLayer>
       </Parallax>
