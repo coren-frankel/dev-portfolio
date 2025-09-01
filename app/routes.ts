@@ -1,8 +1,11 @@
-import { type RouteConfig, route } from "@react-router/dev/routes";
-import { flatRoutes } from "@react-router/fs-routes";
+import { type RouteConfig, route, index } from "@react-router/dev/routes";
 
 export default [
-  // * matches all URLs, the ? makes it optional so it will match / as well
-  ...(await flatRoutes()),
+  index("./routes/_index.tsx"),
+  route("/about", "./routes/about.tsx"),
+  route("/arcade", "./routes/arcade.tsx"),
+  route("/contact", "./routes/contact.tsx"),
+  route("/home", "./routes/home.tsx"),
+  route("/the-matrix-has-you", "./routes/the-matrix-has-you.tsx"),
   route("*", "./components/NotFound.tsx"),
 ] satisfies RouteConfig;

@@ -56,3 +56,124 @@
     font-size: 14px !important;
   }
 }
+
+/* Enhanced mobile responsiveness for Main.tsx */
+
+/* Responsive image hover effects */
+.responsive-image:hover {
+  transform: scale(1.05);
+}
+
+/* Touch-friendly interactions on mobile */
+@media (hover: none) and (pointer: coarse) {
+  .responsive-image:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
+  }
+
+  /* Increase touch targets on mobile */
+  .ant-card {
+    margin-bottom: 16px;
+  }
+
+  .ant-card-hoverable:active {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+}
+
+/* Optimized spacing for different screen sizes */
+@media (max-width: 576px) {
+  /* Extra small devices */
+  .ant-card-body {
+    padding: 12px !important;
+  }
+
+  .ant-typography h4 {
+    font-size: 16px !important;
+  }
+
+  .ant-list-item {
+    padding: 6px 0 !important;
+  }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+  /* Small devices */
+  .ant-card-body {
+    padding: 16px !important;
+  }
+
+  .ant-typography h4 {
+    font-size: 18px !important;
+  }
+}
+
+@media (min-width: 769px) {
+  /* Medium and larger devices */
+  .ant-card-body {
+    padding: 20px !important;
+  }
+
+  .ant-typography h4 {
+    font-size: 20px !important;
+  }
+}
+
+/* Smooth animations for better UX */
+.ant-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ant-image {
+  transition: transform 0.3s ease;
+}
+
+/* Loading states */
+.ant-skeleton-image {
+  border-radius: 6px;
+}
+
+/* Float button adjustments for mobile */
+@media (max-width: 768px) {
+  .ant-float-btn-group .ant-float-btn {
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  .ant-float-btn-group {
+    right: 12px !important;
+    bottom: 20px !important;
+  }
+}
+
+/* Enhance parallax sections for mobile */
+@media (max-width: 768px) {
+  .parallax-layer {
+    padding: 10px !important;
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .responsive-image,
+  .ant-card,
+  .ant-image {
+    transition: none !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .ant-card {
+    border: 2px solid currentColor;
+  }
+}
+
+/* Dark mode optimizations */
+@media (prefers-color-scheme: dark) {
+  .ant-card {
+    background-color: rgba(255, 255, 255, 0.5) !important;
+    backdrop-filter: blur(10px);
+  }
+}

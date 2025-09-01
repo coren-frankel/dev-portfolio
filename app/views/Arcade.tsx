@@ -1,3 +1,4 @@
+import "../styles/Arcade.css";
 import { Avatar, Card, Grid, Popover, Typography } from "antd";
 import { Link } from "react-router";
 import { Layout } from "../components/Layout";
@@ -7,7 +8,7 @@ import { useEffect, useRef, useState } from "react";
 const { useBreakpoint } = Grid;
 
 const Arcade = () => {
-  const [isMuted] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
   const [open, setOpen] = useState(true);
   const screens = useBreakpoint();
   const iframeRef = useRef<HTMLIFrameElement | null>(null);
@@ -17,22 +18,111 @@ const Arcade = () => {
     return () => clearTimeout(warning);
   }, []);
 
+  // Enhanced iframe communication for mobile state and audio control
+  useEffect(() => {
+    if (!iframeRef.current) return;
+
+    const iframe = iframeRef.current;
+    const isMobileDevice =
+      "ontouchstart" in window || navigator.maxTouchPoints > 0;
+
+    // Handle messages from the iframe
+    const handleIframeMessage = (event: MessageEvent) => {
+      // Verify origin for security
+      if (event.origin !== "https://coren-frankel.github.io") return;
+
+      // Handle audio state updates from the iframe
+      if (event.data.type === "audioStateUpdate") {
+        setIsMuted(event.data.muted);
+      }
+    };
+
+    const notifyIframeOfInitialState = () => {
+      if (iframe.contentWindow) {
+        // Send initial mobile state
+        iframe.contentWindow.postMessage(
+          {
+            type: "mobileDevice",
+            isMobile: isMobileDevice,
+            touchEnabled: true,
+          },
+          "*",
+        );
+
+        // Send initial audio state
+        iframe.contentWindow.postMessage(
+          {
+            type: "audioControl",
+            action: isMuted ? "mute" : "unmute",
+            muted: isMuted,
+          },
+          "*",
+        );
+      }
+    };
+
+    // Listen for messages from iframe
+    window.addEventListener("message", handleIframeMessage);
+    iframe.addEventListener("load", notifyIframeOfInitialState);
+
+    return () => {
+      window.removeEventListener("message", handleIframeMessage);
+      iframe.removeEventListener("load", notifyIframeOfInitialState);
+    };
+  }, [isMuted]);
+
   const isMobile = () =>
     Object.entries(screens)
       .filter((screen) => !!screen[1])
       .some((screen) => ["xs", "sm"].includes(screen[0]));
 
-  // TODO: Implement mute toggle for iframe audio output
-  // const toggleMute = () => {
-  // setIsMuted((prevIsMuted) => !prevIsMuted);
-  // // Send a message to the iframe to toggle mute/unmute
-  // if (iframeRef.current) {
-  //   const message = {
-  //     action: isMuted ? 'unmute' : 'mute',
-  //   };
-  //   iframeRef.current.contentWindow?.postMessage(message, '*');
-  // }
-  // };
+  // Simplified mute toggle - focuses on what actually works with cross-origin iframes
+  const toggleMute = () => {
+    const newMutedState = !isMuted;
+    setIsMuted(newMutedState);
+
+    // Primary approach: Send postMessage to iframe
+    if (iframeRef.current && iframeRef.current.contentWindow) {
+      const message = {
+        type: "audioControl",
+        action: newMutedState ? "mute" : "unmute",
+        muted: newMutedState,
+      };
+
+      iframeRef.current.contentWindow.postMessage(message, "*");
+      // oxlint-disable-next-line no-console
+      console.log(
+        `📨 Sent ${newMutedState ? "MUTE" : "UNMUTE"} message to iframe`,
+      );
+    }
+
+    // Fallback: Try to access iframe audio elements (only works if same-origin)
+    try {
+      if (iframeRef.current && iframeRef.current.contentDocument) {
+        const audioElements =
+          iframeRef.current.contentDocument.querySelectorAll("audio, video");
+
+        if (audioElements.length > 0) {
+          audioElements.forEach((element: any) => {
+            element.muted = newMutedState;
+            element.volume = newMutedState ? 0 : 1;
+          });
+          // oxlint-disable-next-line no-console
+          console.log(
+            `🎵 Directly controlled ${audioElements.length} audio elements`,
+          );
+        } else {
+          // oxlint-disable-next-line no-console
+          console.log("ℹ️ No audio/video elements found in iframe");
+        }
+      }
+    } catch {
+      // oxlint-disable-next-line no-console
+      console.error(
+        "⚠️ Cannot access iframe content (cross-origin restriction) - Game must handle postMessage",
+      );
+    }
+  };
   return (
     <Layout style={{ padding: "0" }}>
       <div
@@ -81,6 +171,7 @@ const Arcade = () => {
                   borderRadius: "0",
                 }}
                 allow="fullscreen"
+                sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
               />
             </div>
           }
@@ -91,7 +182,24 @@ const Arcade = () => {
               <Popover
                 open={open}
                 content={
-                  "Heads up! Check your audio output before you click around or hover over my name. There are small sounds elicited from within the frame."
+                  <div>
+                    <div style={{ marginBottom: "8px" }}>
+                      Heads up! Check your audio output before you click around
+                      or hover over my name. There are small sounds elicited
+                      from within the frame.
+                    </div>
+                    <div
+                      style={{
+                        fontSize: "12px",
+                        color: "#666",
+                        fontStyle: "italic",
+                      }}
+                    >
+                      Note: The {isMuted ? "muted" : "sound"} icon toggles
+                      visual state. Audio control requires the game to implement
+                      message handling.
+                    </div>
+                  </div>
                 }
               >
                 <Avatar
@@ -99,27 +207,44 @@ const Arcade = () => {
                     isMuted ? (
                       <MutedOutlined />
                     ) : (
-                      <SoundTwoTone twoToneColor="#FF550a" />
+                      <SoundTwoTone twoToneColor="#dc6532ff" />
                     )
                   }
-                  // onClick={toggleMute}
+                  onClick={toggleMute}
+                  className="arcade-audio-control"
+                  style={{ cursor: "pointer" }}
                 />
               </Popover>
             }
             description={
-              <Typography.Paragraph
-                style={{
-                  fontSize: isMobile() ? "14px" : "16px",
-                  margin: 0,
-                }}
-              >
-                For now, Kern&apos;s Arcade only features this Minesweeper clone
-                that I created with vanilla JavaScript, HTML, & CSS. Check out
-                the code{" "}
-                <Link to="https://github.com/coren-frankel/NinjaSweeper?tab=readme-ov-file#ninjasweeper">
-                  here
-                </Link>
-              </Typography.Paragraph>
+              <div>
+                <Typography.Paragraph
+                  style={{
+                    fontSize: isMobile() ? "14px" : "16px",
+                    margin: 0,
+                  }}
+                >
+                  For now, Kern&apos;s Arcade only features this Minesweeper
+                  clone that I created with vanilla JavaScript, HTML, & CSS.
+                  Check out the code{" "}
+                  <Link to="https://github.com/coren-frankel/NinjaSweeper?tab=readme-ov-file#ninjasweeper">
+                    here
+                  </Link>
+                </Typography.Paragraph>
+                {isMobile() && (
+                  <Typography.Text
+                    style={{
+                      fontSize: "11px",
+                      color: "#666",
+                      fontStyle: "italic",
+                      display: "block",
+                      marginTop: "4px",
+                    }}
+                  >
+                    💡 Mobile tip: Long press on squares to flag mines
+                  </Typography.Text>
+                )}
+              </div>
             }
           />
         </Card>

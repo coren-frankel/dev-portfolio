@@ -1,0 +1,105 @@
+{
+  "parallaxSections": [
+    {
+      "offset": 0,
+      "backgroundColor": "transparent",
+      "nextSectionOffset": 1,
+      "centerImage": "web",
+      "skills": ["skills-1", "skills-2"]
+    },
+    {
+      "offset": 1,
+      "backgroundColor": "#805E73",
+      "nextSectionOffset": 2,
+      "centerImage": "full",
+      "skills": ["backend-1", "database-1"]
+    },
+    {
+      "offset": 2,
+      "backgroundColor": "#87BCDE",
+      "nextSectionOffset": 3,
+      "centerImage": "sql",
+      "skills": ["devops-1", "tools-1"]
+    }
+  ],
+  "skills": [
+    {
+      "id": "skills-1",
+      "title": "Programming & Query Languages",
+      "description": "I'm an aspiring polyglot, proficient in these languages and syntaxes, among others",
+      "iconUrl": "https://go-skill-icons.vercel.app/api/icons?i=md,html,css,js,ts,python,java,graphql",
+      "altText": "Markdown, HTML, CSS, JavaScript, TypeScript, Python, Java, GraphQL",
+      "previewMask": "View Skills",
+      "perlineConfig": {
+        "mobile": 3,
+        "tablet": 4,
+        "desktop": 4
+      }
+    },
+    {
+      "id": "skills-2",
+      "title": "Frontend Libraries & Frameworks",
+      "description": "I use various progressive style libraries and frameworks",
+      "iconUrl": "https://go-skill-icons.vercel.app/api/icons?i=tailwind,bootstrap,materialui,antdesign,react,reactnative,jquery",
+      "altText": "Tailwind CSS, Bootstrap, Material UI, Ant Design React, React Native, jQuery",
+      "previewMask": "View Frameworks",
+      "perlineConfig": {
+        "mobile": 3,
+        "tablet": 4,
+        "desktop": 4
+      }
+    },
+    {
+      "id": "backend-1",
+      "title": "Backend & Full Stack Development",
+      "description": "I utilize various backend, full-stack technologies, package managers & runtimes",
+      "iconUrl": "https://go-skill-icons.vercel.app/api/icons?i=nodejs,deno,remix,npm,pnpm,flask,maven,spring,express,expo",
+      "altText": "Node.js, Deno, Remix, npm, pnpm, Flask, Maven, Spring, Express, Expo",
+      "previewMask": "View Backend Tools",
+      "perlineConfig": {
+        "mobile": 3,
+        "tablet": 5,
+        "desktop": 5
+      }
+    },
+    {
+      "id": "database-1",
+      "title": "Data Persistence Tools",
+      "description": "Using RDMSs, BaaS, ORMs, SQL & NoSQL I'm comfortable drafting raw DDL, utilizing migration tools, and performing ETL",
+      "iconUrl": "https://go-skill-icons.vercel.app/api/icons?i=postgres,mysql,supabase,redis,mongodb,sqlite,prisma,sqlalchemy,mongoose,bigquery",
+      "altText": "PostgreSQL, MySQL, Supabase, Redis, MongoDB, SQLite, Prisma, SQLAlchemy, Mongoose, BigQuery",
+      "previewMask": "View Database Tools",
+      "perlineConfig": {
+        "mobile": 3,
+        "tablet": 5,
+        "desktop": 5
+      }
+    },
+    {
+      "id": "devops-1",
+      "title": "Cloud Providers, DevOps Tools",
+      "description": "Development tools that streamline my code to production",
+      "iconUrl": "https://go-skill-icons.vercel.app/api/icons?i=docker,ghactions,digitalocean,vercel,render,ngrok,cloudflare,aws,gcp,sentry,snyk",
+      "altText": "Docker, Github Actions, Vercel, Render, Ngrok, Cloudflare, AWS EC2, Google Cloud Platform, Sentry, Snyk",
+      "previewMask": "View DevOps Tools",
+      "perlineConfig": {
+        "mobile": 4,
+        "tablet": 6,
+        "desktop": 6
+      }
+    },
+    {
+      "id": "tools-1",
+      "title": "GUIs, IDEs, Developer Tools, & OS",
+      "description": "As of late, these are my most used Interactive Development Environments and Operating Systems",
+      "iconUrl": "https://go-skill-icons.vercel.app/api/icons?i=vscode,idea,postman,terminal,xcode,android,androidstudio,apple,linux,ubuntu,eclipse",
+      "altText": "VS Code, IntelliJ Idea, Postman, Terminal, Xcode, Android, Android Studio, Apple, Linux, Ubuntu, Eclipse",
+      "previewMask": "View Development Tools",
+      "perlineConfig": {
+        "mobile": 4,
+        "tablet": 6,
+        "desktop": 6
+      }
+    }
+  ]
+}

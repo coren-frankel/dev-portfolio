@@ -1,12 +1,5 @@
-const defaultGreeting = [
-  'Hiya! I\'m Coren, but some call me "Kern".',
-  "I'm a Software Developer from Denver, CO.",
-  "Welcome to my personal website!",
-  "Hint: type 'menu' & press Enter to see available commands",
-];
-
 interface TextChunkProps {
-  chunks?: string[];
+  chunks: string[];
   delay?: number;
   resetKey?: string | number; // Add a reset key to force re-animation
   startImmediately?: boolean; // New prop to control if chunks should start immediately
@@ -14,7 +7,7 @@ interface TextChunkProps {
 }
 
 export default function TextChunk({
-  chunks = defaultGreeting,
+  chunks,
   delay = 0.5,
   resetKey = "default", // Default to a stable key for consistent behavior
   startImmediately = false, // Default to false for backwards compatibility

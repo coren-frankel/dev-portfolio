@@ -1,0 +1,122 @@
+/* Contact Form Mobile Optimizations */
+
+/* Prevent zoom on iOS when focusing inputs */
+@media screen and (max-width: 768px) {
+  .contact-form input,
+  .contact-form textarea {
+    font-size: 16px !important;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  /* Improve touch targets */
+  .contact-form .ant-input,
+  .contact-form .ant-input-affix-wrapper {
+    height: 44px;
+    min-height: 44px;
+  }
+
+  .contact-form .ant-input-group-addon,
+  .contact-form .ant-input-prefix {
+    padding: 8px 12px;
+  }
+
+  /* Better button styling for mobile */
+  .contact-form .ant-btn {
+    height: 44px;
+    min-height: 44px;
+    font-size: 16px;
+    border-radius: 8px;
+    font-weight: 600;
+  }
+
+  /* Improve textarea on mobile */
+  .contact-form .ant-input {
+    padding: 12px;
+    border-radius: 8px;
+  }
+
+  /* Better spacing for mobile */
+  .contact-form .ant-card-body {
+    padding: 16px !important;
+  }
+
+  /* Improve label visibility */
+  .contact-form label {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #333 !important;
+  }
+}
+
+/* Very small screens */
+@media screen and (max-width: 480px) {
+  .contact-form .ant-card {
+    margin: 5px !important;
+    border-radius: 12px;
+  }
+
+  .contact-form .ant-card-body {
+    padding: 12px !important;
+  }
+
+  /* Stack turnstile and button vertically on very small screens */
+  .contact-form-actions {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  .contact-form-actions > div {
+    width: 100% !important;
+    margin-bottom: 12px;
+  }
+
+  .contact-form-actions > div:last-child {
+    margin-bottom: 0;
+  }
+}
+
+/* Touch-friendly enhancements */
+@media (hover: none) and (pointer: coarse) {
+  .contact-form .ant-btn:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
+  }
+
+  .contact-form .ant-input:focus,
+  .contact-form .ant-input-focused {
+    border-color: #0bd1ff !important;
+    box-shadow: 0 0 0 2px rgba(11, 209, 255, 0.2) !important;
+  }
+
+  /* Better feedback for form interactions */
+  .contact-form .ant-input-affix-wrapper:focus,
+  .contact-form .ant-input-affix-wrapper-focused {
+    border-color: #0bd1ff !important;
+    box-shadow: 0 0 0 2px rgba(11, 209, 255, 0.2) !important;
+  }
+}
+
+/* Accessibility improvements */
+.contact-form .ant-input:focus,
+.contact-form .ant-btn:focus {
+  outline: 2px solid #0bd1ff;
+  outline-offset: 2px;
+}
+
+/* Better error state visibility on mobile */
+@media screen and (max-width: 768px) {
+  .contact-form .ant-form-item-has-error .ant-input,
+  .contact-form .ant-form-item-has-error .ant-input-affix-wrapper {
+    border-color: #ff4d4f !important;
+    border-width: 2px !important;
+  }
+}
+
+/* Responsive turnstile widget */
+@media screen and (max-width: 320px) {
+  .cf-turnstile {
+    transform: scale(0.9);
+    transform-origin: center;
+  }
+}

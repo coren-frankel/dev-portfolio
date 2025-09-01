@@ -1,11 +1,12 @@
 import type { ActionFunctionArgs, MetaFunction } from "react-router";
 import { useActionData, useLoaderData, useNavigate } from "react-router";
-import { useEffect } from "react";
-import { message } from "antd";
-import { Resend } from "resend";
+import { useEffect, useState, useRef } from "react";
+
+import { message, Spin } from "antd";
 import { ContactForm } from "../components/ContactForm";
 import { Layout } from "../components/Layout";
 import type { TurnstileServerValidationResponse } from "@marsidev/react-turnstile";
+import useMobile from "~/hooks/useMobile";
 
 // Define action data types
 type ActionData =
@@ -24,6 +25,11 @@ export const meta: MetaFunction = () => {
     {
       name: "description",
       content: "Get in touch with Coren Frankel for project collaborations",
+    },
+    {
+      name: "viewport",
+      content:
+        "width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes",
     },
   ];
 };
@@ -136,6 +142,8 @@ export async function action({ request }: ActionFunctionArgs) {
 
   // Send email via Resend
   try {
+    // Import Resend only when needed to avoid global scope issues
+    const { Resend } = await import("resend");
     const resend = new Resend(process.env.RESEND_API_KEY);
 
     const emailData = await resend.emails.send({
@@ -162,7 +170,7 @@ export async function action({ request }: ActionFunctionArgs) {
           
           <div style="margin-top: 30px; padding: 15px; background: #e8f4f8; border-radius: 5px; font-size: 12px; color: #666;">
             <p>This email was sent from your portfolio contact form.</p>
-            <p>Timestamp: ${new Date().toISOString()}</p>
+            <p>Timestamp: ${Date.now()}</p>
           </div>
         </div>
       `,
@@ -198,12 +206,30 @@ export default function Contact() {
   const { turnstileSiteKey } = useLoaderData<LoaderData>();
   const [messageApi, contextHolder] = message.useMessage();
   const navigate = useNavigate();
+  const [isClient, setIsClient] = useState(false);
+  const isMobile = useMobile();
+
+  // Ensure component only renders on client to avoid Turnstile SSR issues
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   // Show messages based on action results
+
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
   useEffect(() => {
     if (actionData?.success && "message" in actionData) {
       messageApi.success(actionData.message);
-      setTimeout(() => navigate("/home"), 3000);
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+      timeoutRef.current = setTimeout(() => navigate("/home"), 3000);
+      return () => {
+        if (timeoutRef.current) {
+          clearTimeout(timeoutRef.current);
+        }
+      };
     } else if (actionData && "error" in actionData) {
       messageApi.error(actionData.error);
     }
@@ -212,11 +238,27 @@ export default function Contact() {
   return (
     <>
       {contextHolder}
-      <Layout>
-        <ContactForm
-          siteKey={turnstileSiteKey}
-          resetForm={actionData?.success || false}
-        />
+      <Layout style={{ padding: isMobile ? "0" : "0" }}>
+        {isClient ? (
+          <ContactForm
+            siteKey={turnstileSiteKey}
+            resetForm={actionData?.success || false}
+          />
+        ) : (
+          <div
+            style={{ textAlign: "center", padding: isMobile ? "20px" : "50px" }}
+          >
+            <Spin size="large" />
+            <p
+              style={{
+                marginTop: "20px",
+                fontSize: isMobile ? "14px" : "16px",
+              }}
+            >
+              Loading contact form...
+            </p>
+          </div>
+        )}
       </Layout>
     </>
   );

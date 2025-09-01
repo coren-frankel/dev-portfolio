@@ -63,7 +63,7 @@ const items = [
     path: "/",
     label: (
       <NavLink className="nav-link" to="/">
-        ???
+        Console
       </NavLink>
     ),
   },
@@ -95,6 +95,7 @@ export const Layout = ({
   style?: CSSProperties;
 }) => {
   const [visible, setVisible] = useState(false);
+  const [currentYear, setCurrentYear] = useState(2025); // Default year to avoid SSR issues
   const screens = useBreakpoint();
   const showDrawer = () => {
     setVisible(!visible);
@@ -104,6 +105,8 @@ export const Layout = ({
   useEffect(() => {
     // console.log("location changed", location);
     // setVisible(false);
+    // Set current year after component mounts to avoid SSR issues
+    setCurrentYear(new Date().getFullYear());
   }, [location]);
 
   const { colorFrom, colorMid, colorTo } = useSpring({
@@ -214,8 +217,15 @@ export const Layout = ({
           {children}
         </animated.div>
       </Content>
-      <Footer style={{ textAlign: "center", zIndex: 2 }}>
-        Coren &quot;Kern&quot; Frankel ©{new Date().getFullYear()}
+      <Footer
+        style={{
+          textAlign: "center",
+          zIndex: 2,
+          position: "absolute",
+          bottom: 0,
+        }}
+      >
+        Coren &quot;Kern&quot; Frankel ©{currentYear}
       </Footer>
     </AntdLayout>
   );

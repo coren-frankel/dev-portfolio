@@ -156,6 +156,21 @@ code {
   code {
     padding: 10px;
   }
+
+  /* Better touch targets for mobile */
+  .help-button {
+    padding: 8px;
+    min-width: 40px;
+    min-height: 40px;
+  }
+
+  /* Improve input accessibility on mobile */
+  .ant-input {
+    font-size: 16px !important; /* Prevents zoom on iOS */
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 0;
+  }
 }
 
 @media (max-width: 480px) {
@@ -169,7 +184,7 @@ code {
   }
 
   #command-line {
-    font-size: 12px;
+    font-size: 16px !important; /* Prevents zoom on iOS */
   }
 
   code {
@@ -179,5 +194,37 @@ code {
   .chunk {
     padding-left: 0.5em;
     line-height: 1.1em;
+  }
+
+  /* Stack input and button on very small screens */
+  .terminal-input-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .terminal-input-container button {
+    margin-top: 8px;
+    width: 100%;
+  }
+}
+
+/* Touch-friendly enhancements */
+@media (hover: none) and (pointer: coarse) {
+  /* This targets touch devices */
+  .help-button:active {
+    background: rgba(147, 112, 219, 0.4) !important;
+    transform: scale(0.95);
+  }
+
+  /* Improve button touch feedback */
+  button:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
+  }
+
+  /* Better focus visibility for touch navigation */
+  input:focus {
+    outline: 2px solid #722ed1;
+    outline-offset: 2px;
   }
 }

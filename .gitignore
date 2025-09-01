@@ -27,3 +27,8 @@ build
 .dccache
 .react-router/
 .env
+
+# Cloudflare
+.wrangler
+mf
+.dev.vars*

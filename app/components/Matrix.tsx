@@ -7,8 +7,8 @@ const Matrix = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: "100vh",
-        width: "100vw",
+        margin: "0 auto",
+        width: "90vw",
       }}
       src="https://www.youtube.com/embed/6IDT3MpSCKI?si=kMcbLG6e0OUIcVCR"
       title="YouTube video player"
