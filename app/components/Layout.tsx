@@ -217,7 +217,14 @@ export const Layout = ({
           {children}
         </animated.div>
       </Content>
-      <Footer style={{ textAlign: "center", zIndex: 2 }}>
+      <Footer
+        style={{
+          textAlign: "center",
+          zIndex: 2,
+          position: "absolute",
+          bottom: 0,
+        }}
+      >
         Coren &quot;Kern&quot; Frankel ©{currentYear}
       </Footer>
     </AntdLayout>

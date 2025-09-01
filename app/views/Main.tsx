@@ -366,38 +366,6 @@ function Main() {
                   }
                 />
               </Card>
-
-              <Space direction="vertical" align="center" size={16}>
-                <Typography.Title
-                  level={2}
-                  style={{
-                    color: "cyan",
-                    fontSize: getResponsiveValue("1.5rem", "1.75rem", "2rem"),
-                    textAlign: "center",
-                    margin: getResponsiveValue(
-                      "12px 0 8px 0",
-                      "14px 0 10px 0",
-                      "16px 0",
-                    ),
-                  }}
-                >
-                  And other stuff too...
-                </Typography.Title>
-
-                <Typography.Paragraph
-                  style={{
-                    color: "orange",
-                    fontSize: getResponsiveValue("14px", "15px", "16px"),
-                    textAlign: "center",
-                    margin: getResponsiveValue("0 10px", "0 15px", "0"),
-                    maxWidth: "600px",
-                  }}
-                >
-                  But I don&apos;t have a lot I can show you right now. Be sure
-                  to explore my links, find the secrets of the Console! Check
-                  back again soon.
-                </Typography.Paragraph>
-              </Space>
             </Space>
           </ParallaxLayer>
         </Parallax>
