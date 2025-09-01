@@ -418,17 +418,6 @@ const Landing = () => {
             </Button>
             <Button
               size="small"
-              onClick={() => acceptInputCommand("about")}
-              style={{
-                backgroundColor: "#001529",
-                color: "lavender",
-                border: "1px solid lavender",
-              }}
-            >
-              About
-            </Button>
-            <Button
-              size="small"
               onClick={() => acceptInputCommand("contact")}
               style={{
                 backgroundColor: "#001529",
@@ -437,28 +426,6 @@ const Landing = () => {
               }}
             >
               Contact
-            </Button>
-            <Button
-              size="small"
-              onClick={() => acceptInputCommand("game")}
-              style={{
-                backgroundColor: "#001529",
-                color: "lavender",
-                border: "1px solid lavender",
-              }}
-            >
-              Arcade
-            </Button>
-            <Button
-              size="small"
-              onClick={() => acceptInputCommand("clear")}
-              style={{
-                backgroundColor: "#001529",
-                color: "lavender",
-                border: "1px solid lavender",
-              }}
-            >
-              Clear
             </Button>
           </div>
         )}
