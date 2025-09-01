@@ -1,6 +1,6 @@
 import type { ActionFunctionArgs, MetaFunction } from "react-router";
 import { useActionData, useLoaderData, useNavigate } from "react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 import { message, Spin } from "antd";
 import { ContactForm } from "../components/ContactForm";
@@ -208,10 +208,21 @@ export default function Contact() {
   }, []);
 
   // Show messages based on action results
+
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
   useEffect(() => {
     if (actionData?.success && "message" in actionData) {
       messageApi.success(actionData.message);
-      setTimeout(() => navigate("/home"), 3000);
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+      timeoutRef.current = setTimeout(() => navigate("/home"), 3000);
+      return () => {
+        if (timeoutRef.current) {
+          clearTimeout(timeoutRef.current);
+        }
+      };
     } else if (actionData && "error" in actionData) {
       messageApi.error(actionData.error);
     }
