@@ -1,14 +1,13 @@
 const Matrix = () => {
   return (
     <iframe
-      width="560"
-      height="315"
       style={{
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         margin: "0 auto",
-        width: "90vw",
+        width: "100vw",
+        height: "100vh",
       }}
       src="https://www.youtube.com/embed/6IDT3MpSCKI?si=kMcbLG6e0OUIcVCR"
       title="YouTube video player"

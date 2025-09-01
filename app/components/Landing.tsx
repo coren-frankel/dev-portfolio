@@ -98,6 +98,7 @@ const Landing = () => {
       // Check if the Control or Command key is pressed and the 'X' key is pressed
       if ((event.ctrlKey || event.metaKey) && event.key === "x") {
         event.preventDefault(); // Prevent the default cut operation
+        setShowGreeting(false);
         appendToState(["Follow the white rabbit."]);
         // Soft escape for those who don't know
         const knockKnock = setTimeout(
@@ -119,6 +120,7 @@ const Landing = () => {
           appendToState([
             `Session terminated. Redirecting to home page... Goodbye${name === "Neo" ? "" : " " + name}.`,
           ]);
+          setShowGreeting(false);
           const escapeTimeout = setTimeout(
             () => navigate("/home"),
             STANDARD_DELAY,
