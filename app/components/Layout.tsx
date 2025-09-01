@@ -63,7 +63,7 @@ const items = [
     path: "/",
     label: (
       <NavLink className="nav-link" to="/">
-        ???
+        Console
       </NavLink>
     ),
   },

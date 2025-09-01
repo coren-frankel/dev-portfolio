@@ -1,3 +1,4 @@
+import "../styles/Arcade.css";
 import { Avatar, Card, Grid, Popover, Typography } from "antd";
 import { Link } from "react-router";
 import { Layout } from "../components/Layout";
@@ -15,6 +16,35 @@ const Arcade = () => {
   useEffect(() => {
     const warning = setTimeout(() => setOpen(false), 5000);
     return () => clearTimeout(warning);
+  }, []);
+
+  // Simple mobile detection for iframe communication
+  useEffect(() => {
+    if (!iframeRef.current) return;
+
+    const iframe = iframeRef.current;
+    const isMobileDevice =
+      "ontouchstart" in window || navigator.maxTouchPoints > 0;
+
+    const notifyIframeOfMobileState = () => {
+      if (iframe.contentWindow && isMobileDevice) {
+        // Simple message to inform the game about mobile state
+        iframe.contentWindow.postMessage(
+          {
+            type: "mobileDevice",
+            isMobile: true,
+            touchEnabled: true,
+          },
+          "*",
+        );
+      }
+    };
+
+    iframe.addEventListener("load", notifyIframeOfMobileState);
+
+    return () => {
+      iframe.removeEventListener("load", notifyIframeOfMobileState);
+    };
   }, []);
 
   const isMobile = () =>
@@ -81,6 +111,7 @@ const Arcade = () => {
                   borderRadius: "0",
                 }}
                 allow="fullscreen"
+                sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
               />
             </div>
           }
@@ -107,19 +138,34 @@ const Arcade = () => {
               </Popover>
             }
             description={
-              <Typography.Paragraph
-                style={{
-                  fontSize: isMobile() ? "14px" : "16px",
-                  margin: 0,
-                }}
-              >
-                For now, Kern&apos;s Arcade only features this Minesweeper clone
-                that I created with vanilla JavaScript, HTML, & CSS. Check out
-                the code{" "}
-                <Link to="https://github.com/coren-frankel/NinjaSweeper?tab=readme-ov-file#ninjasweeper">
-                  here
-                </Link>
-              </Typography.Paragraph>
+              <div>
+                <Typography.Paragraph
+                  style={{
+                    fontSize: isMobile() ? "14px" : "16px",
+                    margin: 0,
+                  }}
+                >
+                  For now, Kern&apos;s Arcade only features this Minesweeper
+                  clone that I created with vanilla JavaScript, HTML, & CSS.
+                  Check out the code{" "}
+                  <Link to="https://github.com/coren-frankel/NinjaSweeper?tab=readme-ov-file#ninjasweeper">
+                    here
+                  </Link>
+                </Typography.Paragraph>
+                {isMobile() && (
+                  <Typography.Text
+                    style={{
+                      fontSize: "11px",
+                      color: "#666",
+                      fontStyle: "italic",
+                      display: "block",
+                      marginTop: "4px",
+                    }}
+                  >
+                    💡 Mobile tip: Long press on squares to flag mines
+                  </Typography.Text>
+                )}
+              </div>
             }
           />
         </Card>

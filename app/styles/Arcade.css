@@ -1,0 +1,7 @@
+/* Minimal context menu enablement for mobile devices */
+@media (pointer: coarse) {
+  iframe {
+    /* Allow context menus on touch devices */
+    -webkit-touch-callout: default;
+  }
+}

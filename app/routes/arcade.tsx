@@ -8,6 +8,11 @@ export const meta: MetaFunction = () => {
       name: "description",
       content: "Interactive games and demos by Coren Frankel",
     },
+    {
+      name: "viewport",
+      content:
+        "width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover",
+    },
   ];
 };
 
