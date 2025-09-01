@@ -25,6 +25,11 @@ export const meta: MetaFunction = () => {
       name: "description",
       content: "Get in touch with Coren Frankel for project collaborations",
     },
+    {
+      name: "viewport",
+      content:
+        "width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes",
+    },
   ];
 };
 
@@ -201,10 +206,18 @@ export default function Contact() {
   const [messageApi, contextHolder] = message.useMessage();
   const navigate = useNavigate();
   const [isClient, setIsClient] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   // Ensure component only renders on client to avoid Turnstile SSR issues
   useEffect(() => {
     setIsClient(true);
+    // Detect mobile for potential UX adjustments
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768 || "ontouchstart" in window);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   // Show messages based on action results
@@ -231,16 +244,25 @@ export default function Contact() {
   return (
     <>
       {contextHolder}
-      <Layout>
+      <Layout style={{ padding: isMobile ? "0" : "0" }}>
         {isClient ? (
           <ContactForm
             siteKey={turnstileSiteKey}
             resetForm={actionData?.success || false}
           />
         ) : (
-          <div style={{ textAlign: "center", padding: "50px" }}>
+          <div
+            style={{ textAlign: "center", padding: isMobile ? "20px" : "50px" }}
+          >
             <Spin size="large" />
-            <p style={{ marginTop: "20px" }}>Loading contact form...</p>
+            <p
+              style={{
+                marginTop: "20px",
+                fontSize: isMobile ? "14px" : "16px",
+              }}
+            >
+              Loading contact form...
+            </p>
           </div>
         )}
       </Layout>
