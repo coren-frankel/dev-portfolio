@@ -5,3 +5,26 @@
     -webkit-touch-callout: default;
   }
 }
+
+/* Audio control button styling */
+.arcade-audio-control {
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.arcade-audio-control:hover {
+  transform: scale(1.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.arcade-audio-control:active {
+  transform: scale(0.95);
+}
+
+/* Ensure proper touch feedback on mobile */
+@media (hover: none) and (pointer: coarse) {
+  .arcade-audio-control:active {
+    transform: scale(0.9);
+    transition: transform 0.1s ease;
+  }
+}

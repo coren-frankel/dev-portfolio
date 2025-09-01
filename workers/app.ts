@@ -15,6 +15,7 @@ const requestHandler = createRequestHandler(
 );
 
 export default {
+  // oxlint-disable-next-line require-await
   async fetch(request, env, ctx) {
     return requestHandler(request, {
       cloudflare: { env, ctx },
