@@ -15,7 +15,6 @@ This repository contains the source code for my personal portfolio website. Buil
 
 - **Ant Design**: React UI library for building elegant and responsive interfaces
 - **React Spring**: Animation library for React applications
-- **React Three Fiber**: React renderer for Three.js 3D graphics
 
 ### Development Tools
 
@@ -242,7 +241,6 @@ This project has been migrated from Remix v2 to React Router v7. Key changes inc
 
 - [React Router v7 Documentation](https://reactrouter.com)
 - [React Spring Documentation](https://www.react-spring.dev/docs)
-- [React Three Fiber Documentation](https://r3f.docs.pmnd.rs)
 - [Ant Design Documentation](https://ant.design)
 - [Oxlint Documentation](https://oxc.rs/docs/guide/usage/linter)
 - [Cloudflare Turnstile Documentation](https://developers.cloudflare.com/turnstile)
