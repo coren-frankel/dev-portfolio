@@ -38,6 +38,7 @@ import {
   Space,
   FloatButton,
   Tooltip,
+  Popover,
 } from "antd";
 import {
   HeartTwoTone,
@@ -210,41 +211,41 @@ function Main() {
             />
           </ParallaxLayer>
 
-          <ParallaxLayer offset={3.2} speed={0.4} style={{ opacity: 0.6 }}>
+          <ParallaxLayer
+            offset={isMobile ? 2.9 : 3.2}
+            speed={0.4}
+            style={{ opacity: 0.6 }}
+          >
             <img
               src={branch}
               width={getResponsiveValue("15%", "18%", "20%")}
               className="block"
-              style={{ marginLeft: "5%", marginTop: "5%" }}
+              style={{ marginLeft: "5%", marginTop: "0%" }}
             />
             <div
               className="block"
               style={{ marginLeft: getResponsiveValue("20%", "22%", "25%") }}
             >
-              <div
-                className="box sb"
-                style={{
-                  fontSize: getResponsiveValue("14px", "15px", "16px"),
-                  padding: getResponsiveValue("15px", "18px", "20px"),
-                }}
-              >
-                Eyo!
-              </div>
-              <img src={deer} width={getResponsiveValue("25%", "28%", "30%")} />
+              <Popover open placement="top" content="Eyo!">
+                <img
+                  src={deer}
+                  width={getResponsiveValue("25%", "28%", "30%")}
+                />
+              </Popover>
             </div>
           </ParallaxLayer>
 
           <ParallaxLayer
-            offset={3.3}
-            speed={-0.4}
+            offset={3.5}
+            speed={-0.6}
             style={{
               display: "flex",
               alignItems: "center",
-              justifyContent: "center",
+              justifyContent: "space-around",
               pointerEvents: "none",
             }}
           >
-            <Image src={mtn} preview={false} width={"60%"} />
+            <Image src={mtn} preview={false} width={"75%"} />
           </ParallaxLayer>
 
           {/* Render Skill Sections */}
@@ -271,8 +272,6 @@ function Main() {
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-              backgroundPosition: "center",
-              backgroundImage: `url(${mtn})`,
               padding: getResponsiveValue("10px", "15px", "20px"),
             }}
             onClick={() => navigateToSection(0)}
@@ -287,7 +286,7 @@ function Main() {
                   maxWidth: getResponsiveValue("100%", "500px", "500px"),
                   alignSelf: getResponsiveValue("center", "center", "end"),
                   width: getResponsiveValue("100%", "auto", "auto"),
-                  margin: getResponsiveValue("0 10px", "0 15px", "0"),
+                  margin: getResponsiveValue("0 5px", "0 15px", "0"),
                 }}
                 loading={imageLoading["open-source"]}
               >

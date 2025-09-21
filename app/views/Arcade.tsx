@@ -13,10 +13,15 @@ const Arcade = () => {
   const screens = useBreakpoint();
   const iframeRef = useRef<HTMLIFrameElement | null>(null);
 
+  // Define the trusted origin for your iframe
+  const TRUSTED_ORIGIN = "https://coren-frankel.github.io";
+
   useEffect(() => {
-    const warning = setTimeout(() => setOpen(false), 5000);
-    return () => clearTimeout(warning);
-  }, []);
+    if (open) {
+      const warning = setTimeout(() => setOpen(false), 5000);
+      return () => clearTimeout(warning);
+    }
+  }, [open]);
 
   // Enhanced iframe communication for mobile state and audio control
   useEffect(() => {
@@ -29,7 +34,7 @@ const Arcade = () => {
     // Handle messages from the iframe
     const handleIframeMessage = (event: MessageEvent) => {
       // Verify origin for security
-      if (event.origin !== "https://coren-frankel.github.io") return;
+      if (event.origin !== TRUSTED_ORIGIN) return;
 
       // Handle audio state updates from the iframe
       if (event.data.type === "audioStateUpdate") {
@@ -46,7 +51,7 @@ const Arcade = () => {
             isMobile: isMobileDevice,
             touchEnabled: true,
           },
-          "*",
+          TRUSTED_ORIGIN,
         );
 
         // Send initial audio state
@@ -56,7 +61,7 @@ const Arcade = () => {
             action: isMuted ? "mute" : "unmute",
             muted: isMuted,
           },
-          "*",
+          TRUSTED_ORIGIN,
         );
       }
     };
@@ -89,7 +94,7 @@ const Arcade = () => {
         muted: newMutedState,
       };
 
-      iframeRef.current.contentWindow.postMessage(message, "*");
+      iframeRef.current.contentWindow.postMessage(message, TRUSTED_ORIGIN);
       // oxlint-disable-next-line no-console
       console.log(
         `📨 Sent ${newMutedState ? "MUTE" : "UNMUTE"} message to iframe`,
@@ -182,38 +187,27 @@ const Arcade = () => {
               <Popover
                 open={open}
                 content={
-                  <div>
-                    <div style={{ marginBottom: "8px" }}>
-                      Heads up! Check your audio output before you click around
-                      or hover over my name. There are small sounds elicited
-                      from within the frame.
-                    </div>
-                    <div
-                      style={{
-                        fontSize: "12px",
-                        color: "#666",
-                        fontStyle: "italic",
-                      }}
-                    >
-                      Note: The {isMuted ? "muted" : "sound"} icon toggles
-                      visual state. Audio control requires the game to implement
-                      message handling.
-                    </div>
+                  <div style={{ marginBottom: "8px" }}>
+                    Heads up! There are some small sounds effects elicited from
+                    within the frame. Check your audio output before you click
+                    around or hover over my name on this embedded page.
                   </div>
                 }
               >
-                <Avatar
-                  icon={
-                    isMuted ? (
-                      <MutedOutlined />
-                    ) : (
-                      <SoundTwoTone twoToneColor="#dc6532ff" />
-                    )
-                  }
-                  onClick={toggleMute}
-                  className="arcade-audio-control"
-                  style={{ cursor: "pointer" }}
-                />
+                <span onMouseEnter={() => setOpen(true)}>
+                  <Avatar
+                    icon={
+                      isMuted ? (
+                        <MutedOutlined />
+                      ) : (
+                        <SoundTwoTone twoToneColor="#dc6532ff" />
+                      )
+                    }
+                    onClick={toggleMute}
+                    className="arcade-audio-control"
+                    style={{ cursor: "pointer" }}
+                  />
+                </span>
               </Popover>
             }
             description={

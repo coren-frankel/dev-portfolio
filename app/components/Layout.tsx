@@ -222,7 +222,9 @@ export const Layout = ({
           textAlign: "center",
           zIndex: 2,
           position: "absolute",
-          bottom: 0,
+          bottom: -10,
+          fontSize: "1.2em",
+          backgroundColor: "lavender",
         }}
       >
         Coren &quot;Kern&quot; Frankel ©{currentYear}
